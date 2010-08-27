@@ -7,6 +7,10 @@ Object printInt(Object self) {
   return self;
 }
 
+Object evalInt(Object self) {
+  return self;
+}
+
 Object makeInt() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -16,5 +20,7 @@ Object makeInt() {
   obj->value = (unsigned long int *) num;
   obj->type  = INT;
   obj->print = &printInt;
+  obj->eval  = &evalInt;
+
   return obj;
 }

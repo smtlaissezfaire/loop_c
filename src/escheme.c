@@ -24,7 +24,7 @@ Object read() {
 }
 
 Object eval(Object obj) {
-  return obj;
+  return obj->eval(obj);
 }
 
 void print(Object obj) {
