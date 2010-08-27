@@ -1,0 +1,6 @@
+# object files
+bin
+src/*.o
+
+# re2c generated scanner
+src/scanner.c
