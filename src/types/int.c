@@ -16,7 +16,7 @@ static Object makeInt() {
   Object obj   = malloc(sizeof(sObject));
 
   obj->type           = INT;
-  obj->value.intValue = (long) atoi(token->str);
+  obj->value.intValue = strtol(token->str, NULL, 10);
   obj->print          = &printInt;
   obj->eval           = &evalInt;
 
