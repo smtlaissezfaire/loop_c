@@ -1,3 +1,69 @@
-int __replace_me() {
-  return 0;
+#include "shared.h"
+#include "scanner.h"
+
+#define YYCTYPE   char
+#define YYCURSOR  end_of_match
+#define YYLIMIT   (str+length)
+#define YYFILL(n) {}
+/* #define YYMARKER  backtrack */
+
+#define MAKE_TOKEN(TYPE, S, END) (makeToken((TYPE), (S), (END))); continue
+
+Token *firstToken = NULL;
+Token *lastToken  = NULL;
+
+static string copyString(string start, string end) {
+  string str = calloc(end-start+1, sizeof(char));
+  return strncpy(str, start, end-start); /* strncpy returns str */
+}
+
+static Token *makeToken(enum tokenTypes tokenType, string start, string end) {
+  Token *token = malloc(sizeof(Token));
+  token->type  = tokenType;
+  token->str   = copyString(start, end);
+
+  if (lastToken != NULL) {
+    lastToken->nextToken = token;
+  } else {
+    firstToken = token;
+  }
+
+  lastToken = token;
+
+  return token;
+}
+
+static string parseError(string code) {
+  string error = "PARSE ERROR with: ";
+  string str = malloc(sizeof(char) * (strlen(code) + strlen(error)));
+
+  strcat(str, error);
+  strcat(str, code);
+  return str;
+}
+
+Token *scan(string str) {
+  string start = str;
+  string end_of_match = str;
+  string last_match = str;
+
+  int length = strlen(str);
+  /* string backtrack; */
+
+  for(;;) {
+    last_match = end_of_match;
+
+    /*!re2c
+      re2c:indent:top = 2;
+
+      int            = [0-9]+;
+      EOF            = "\000";
+
+      int                                { MAKE_TOKEN(tINT,         last_match,   end_of_match);   }
+      EOF                                { return firstToken; }
+      [^]                                { exitWithMessage(1, parseError(copyString(start, end_of_match))); }
+    */
+  }
+
+  return firstToken;
 }
