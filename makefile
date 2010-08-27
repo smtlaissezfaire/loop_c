@@ -14,6 +14,7 @@ clean:
 	rm -rf bin
 	rm -rf src/scanner.c
 	rm -rf src/*.o
+	rm -rf spec/logs
 
 spec: compile
 	spec spec/escheme_spec.rb
