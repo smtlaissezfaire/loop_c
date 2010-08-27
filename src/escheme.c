@@ -19,15 +19,15 @@ static Token *getToken() {
   return currentToken;
 }
 
-Object read() {
+static Object read() {
   return makeInt();
 }
 
-Object eval(Object obj) {
+static Object eval(Object obj) {
   return obj->eval(obj);
 }
 
-void print(Object obj) {
+static void print(Object obj) {
   obj->print(obj);
 }
 
