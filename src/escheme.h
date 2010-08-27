@@ -8,9 +8,13 @@ enum types {
   PROC
 };
 
+typedef union {
+  long intValue;
+} oValue;
+
 struct sObject {
   enum types type;
-  void *value;
+  oValue value;
   struct sObject *(*print)(struct sObject *);
   struct sObject *(*eval)(struct sObject *);
 };

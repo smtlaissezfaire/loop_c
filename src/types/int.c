@@ -1,5 +1,5 @@
-unsigned long int getValue(Object self) {
-  return((long) self->value);
+long getValue(Object self) {
+  return self->value.intValue;
 }
 
 Object printInt(Object self) {
@@ -15,12 +15,10 @@ Object makeInt() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
 
-  unsigned long int num = atoi(token->str);
-
-  obj->value = (unsigned long int *) num;
-  obj->type  = INT;
-  obj->print = &printInt;
-  obj->eval  = &evalInt;
+  obj->type           = INT;
+  obj->value.intValue = (long) atoi(token->str);
+  obj->print          = &printInt;
+  obj->eval           = &evalInt;
 
   return obj;
 }
