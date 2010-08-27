@@ -24,12 +24,10 @@ describe "escheme" do
       run("2").should == "2"
     end
 
-    # it "should parse space from a number" do
-    #   pending do
-    #     run("   2 ").should == "2"
-    #   end
-    # end
-    #
+    it "should parse space from a number" do
+      run("   2 ").should == "2"
+    end
+
     # it "should parse a floating point number" do
     #   pending do
     #     run("3.32").should == "3.320000"

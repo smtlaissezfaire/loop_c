@@ -57,10 +57,12 @@ Token *scan(string str) {
       re2c:indent:top = 2;
 
       int            = [0-9]+;
+      whitespace     = ([\ \t\n])*;
       EOF            = "\000";
 
       int                                { MAKE_TOKEN(tINT,         last_match,   end_of_match);   }
       EOF                                { return firstToken; }
+      whitespace                         { continue; }
       [^]                                { exitWithMessage(1, parseError(copyString(start, end_of_match))); }
     */
   }
