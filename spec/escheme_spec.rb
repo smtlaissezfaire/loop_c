@@ -1,9 +1,15 @@
+require "spec_helper"
+
 describe "escheme" do
   def run(cmd)
     cmd = cmd.dup.gsub('"', '\"')
 
-    if ENV['VALGRIND']
-      `valgrind --log-file=spec/valgrind.log bin/escheme -e "#{cmd}"`
+    if ENV['VALGRIND'] == "true"
+      FileUtils.mkdir_p "spec/logs"
+      out = `valgrind --log-file=spec/logs/valgrind.log bin/escheme -e "#{cmd}"`
+
+      File.read("spec/logs/valgrind.log").should =~ /ERROR SUMMARY: 0/
+      out
     else
       `bin/escheme -e "#{cmd}"`
     end

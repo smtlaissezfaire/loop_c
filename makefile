@@ -17,6 +17,9 @@ clean:
 spec: compile
 	spec spec/escheme_spec.rb
 
+spec_valgrind: compile
+	VALGRIND=true spec spec/escheme_spec.rb
+
 generate_tokenizer:
 	cd src && \
 	re2c scanner.re2c > scanner.c && \
