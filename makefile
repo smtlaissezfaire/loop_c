@@ -19,6 +19,8 @@ clean:
 spec: compile
 	spec spec/escheme_spec.rb
 
+test: spec
+
 spec_valgrind: compile
 	VALGRIND=true spec spec/escheme_spec.rb
 
