@@ -14,7 +14,8 @@ enum tokenTypes {
 enum tokenTypes {
   tINT,
   tFLOAT,
-  tBOOLEAN
+  tBOOLEAN,
+  tSTRING
 };
 
 struct token {

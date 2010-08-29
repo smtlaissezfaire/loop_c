@@ -59,6 +59,7 @@ Token *scan(string str) {
       int            = [0-9]+;
       period         = ".";
       float          = [0-9]* period [0-9]+;
+      string         = "\"" [a-z]* "\"";
       boolean_true   = "#t";
       boolean_false  = "#f";
       whitespace     = ([\ \t\n])*;
@@ -66,6 +67,7 @@ Token *scan(string str) {
 
       float                              { MAKE_TOKEN(tFLOAT,       last_match,   end_of_match);   }
       int                                { MAKE_TOKEN(tINT,         last_match,   end_of_match);   }
+      string                             { MAKE_TOKEN(tSTRING,      last_match+1, end_of_match-1); }
       boolean_true | boolean_false       { MAKE_TOKEN(tBOOLEAN,     last_match,   end_of_match);   }
       EOF                                { return firstToken; }
       whitespace                         { continue; }

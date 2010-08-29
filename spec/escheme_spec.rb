@@ -37,20 +37,20 @@ describe "escheme" do
     end
   end
 
-  # describe "strings" do
-  #   it "should output a string as a string" do
-  #     pending do
-  #       run('"foo"').should == '"foo"'
-  #     end
-  #   end
-  #
-  #   it "should output the correct string" do
-  #     pending do
-  #       run('"foobar"').should == '"foobar"'
-  #     end
-  #   end
-  # end
-  #
+  describe "strings" do
+    it "should output a string as a string" do
+      run('"foo"').should == '"foo"'
+    end
+
+    it "should output the correct string" do
+      run('"foobar"').should == '"foobar"'
+    end
+
+    it "should allow for an empty string" do
+      run('""').should == '""'
+    end
+  end
+
   describe "booleans - #t and #f" do
     it "should have #t as true" do
       run("#t").should == "#t"

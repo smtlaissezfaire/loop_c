@@ -5,6 +5,7 @@
 #include "types/int.c"
 #include "types/float.c"
 #include "types/booleans.c"
+#include "types/string.c"
 
 static string source;
 static Token *currentToken  = NULL;
@@ -38,6 +39,8 @@ static Object read() {
       return makeFloat();
     case tBOOLEAN:
       return makeBoolean();
+    case tSTRING:
+      return makeString();
     default:
       exitWithMessage(1, "default case in makeObject - couldn't make object.  INTERNAL ERROR");
   }
