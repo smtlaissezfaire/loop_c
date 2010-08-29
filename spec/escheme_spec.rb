@@ -69,55 +69,69 @@ describe "escheme" do
   #   end
   # end
   #
-  # describe "lists" do
-  #   describe "quoting" do
-  #     describe "with (quote)" do
-  #       it "should output a sym for a sym" do
-  #         pending do
-  #           run("(quote foo)").should == "foo"
-  #         end
-  #       end
-  #
-  #       it "should output a list for a list" do
-  #         pending do
-  #           run("(quote ())").should == "()"
-  #         end
-  #       end
-  #
-  #       it "should output the contents of a quoted list" do
-  #         pending do
-  #           run("(quote (foo bar baz))").should == "(foo bar baz)"
-  #         end
-  #       end
-  #     end
-  #   end
-  #
-  #   describe "car" do
-  #     it "should be able to car a list" do
-  #       pending do
-  #         run("(car (quote (a b c)))").should == "a"
-  #       end
-  #     end
-  #
-  #     it "should be able to car a list" do
-  #       pending do
-  #         run("(car (quote (x y z)))").should == "x"
-  #       end
-  #     end
-  #
-  #     it "should raise an error on an empty list" do
-  #       pending do
-  #         run("(car (quote ()))").should == "ERROR!  Can't car an empty list"
-  #       end
-  #     end
-  #   end
-  #
-  #   describe "cdr" do
-  #     it "should return the rest of the list" do
-  #       pending do
-  #         run("(cdr (quote (a b c)))").should == "(b c)"
-  #       end
-  #     end
-  #   end
-  # end
+  describe "lists" do
+    describe "list function" do
+      # it "should make a nil list" do
+      #   run("(list)").should == "()"
+      # end
+      #
+      # it "should make a list" do
+      #   run("(list 1)").should == "(1)"
+      # end
+      #
+      # it "should make a list with two elements" do
+      #   pending do
+      #     run("(list 1 2)").should == "(1 2)"
+      #   end
+      # end
+    end
+
+    describe "quoting" do
+      describe "with (quote)" do
+        it "should output a sym for a sym" do
+          run("(quote foo)").should == "'foo"
+        end
+
+        # it "should output a list for a list" do
+        #   pending do
+        #     run("(quote ())").should == "()"
+        #   end
+        # end
+        #
+        # it "should output the contents of a quoted list" do
+        #   pending do
+        #     run("(quote (foo bar baz))").should == "(foo bar baz)"
+        #   end
+        # end
+      end
+    end
+
+    # describe "car" do
+    #   it "should be able to car a list" do
+    #     pending do
+    #       run("(car (quote (a b c)))").should == "a"
+    #     end
+    #   end
+    #
+    #   it "should be able to car a list" do
+    #     pending do
+    #       run("(car (quote (x y z)))").should == "x"
+    #     end
+    #   end
+    #
+    #   it "should raise an error on an empty list" do
+    #     pending do
+    #       run("(car (quote ()))").should == "ERROR!  Can't car an empty list"
+    #     end
+    #   end
+    # end
+    #
+    # describe "cdr" do
+    #   it "should return the rest of the list" do
+    #     pending do
+    #       run("(cdr (quote (a b c)))").should == "(b c)"
+    #     end
+    #   end
+    # end
+  end
 end

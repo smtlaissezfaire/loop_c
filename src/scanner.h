@@ -18,7 +18,10 @@ enum tokenTypes {
   tINT,
   tFLOAT,
   tBOOLEAN,
-  tSTRING
+  tSTRING,
+  tSYMBOL,
+  tOPEN_PAREN,
+  tCLOSE_PAREN
 };
 
 struct token {

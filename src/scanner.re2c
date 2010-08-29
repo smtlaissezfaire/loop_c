@@ -63,17 +63,23 @@ Token *scan(string str) {
       period         = ".";
       float          = [0-9]* period [0-9]+;
       string         = "\"" [a-z]* "\"";
+      symbol         = [a-z]+;
       boolean_true   = "#t";
       boolean_false  = "#f";
+      open_paren     = "(";
+      close_paren    = ")";
       whitespace     = ([\ \t\n])*;
       EOF            = "\000";
 
       float                              { MAKE_TOKEN(tFLOAT,       last_match,   end_of_match);   }
       int                                { MAKE_TOKEN(tINT,         last_match,   end_of_match);   }
       string                             { MAKE_TOKEN(tSTRING,      last_match+1, end_of_match-1); }
+      symbol                             { MAKE_TOKEN(tSYMBOL,      last_match,   end_of_match);   }
       boolean_true | boolean_false       { MAKE_TOKEN(tBOOLEAN,     last_match,   end_of_match);   }
-      EOF                                { return firstToken; }
+      open_paren                         { MAKE_TOKEN(tOPEN_PAREN,  last_match,   end_of_match);   }
+      close_paren                        { MAKE_TOKEN(tCLOSE_PAREN, last_match,   end_of_match);   }
       whitespace                         { continue; }
+      EOF                                { return firstToken; }
       [^]                                { exitWithMessage(1, parseError(copyString(start, end_of_match))); }
     */
   }

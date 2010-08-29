@@ -9,6 +9,8 @@
 #include "types/float.c"
 #include "types/booleans.c"
 #include "types/string.c"
+#include "types/list.c"
+#include "types/symbol.c"
 
 static string source;
 static Token *currentToken  = NULL;
@@ -44,6 +46,10 @@ static Object read() {
       return makeBoolean();
     case tSTRING:
       return makeString();
+    case tSYMBOL:
+      return makeSymbol();
+    case tOPEN_PAREN:
+      return makeList();
     default:
       exitWithMessage(1, "default case in makeObject - couldn't make object.  INTERNAL ERROR");
   }
