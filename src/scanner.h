@@ -13,7 +13,8 @@ enum tokenTypes {
 
 enum tokenTypes {
   tINT,
-  tFLOAT
+  tFLOAT,
+  tBOOLEAN
 };
 
 struct token {

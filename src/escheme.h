@@ -11,6 +11,7 @@ enum types {
 typedef union {
   long  intValue;
   float floatValue;
+  bool  booleanValue;
 } oValue;
 
 struct sObject {

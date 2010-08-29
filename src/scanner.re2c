@@ -59,11 +59,14 @@ Token *scan(string str) {
       int            = [0-9]+;
       period         = ".";
       float          = [0-9]* period [0-9]+;
+      boolean_true   = "#t";
+      boolean_false  = "#f";
       whitespace     = ([\ \t\n])*;
       EOF            = "\000";
 
       float                              { MAKE_TOKEN(tFLOAT,       last_match,   end_of_match);   }
       int                                { MAKE_TOKEN(tINT,         last_match,   end_of_match);   }
+      boolean_true | boolean_false       { MAKE_TOKEN(tBOOLEAN,     last_match,   end_of_match);   }
       EOF                                { return firstToken; }
       whitespace                         { continue; }
       [^]                                { exitWithMessage(1, parseError(copyString(start, end_of_match))); }

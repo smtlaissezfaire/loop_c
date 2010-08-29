@@ -51,20 +51,16 @@ describe "escheme" do
   #   end
   # end
   #
-  # describe "booleans - #t and #f" do
-  #   it "should have #t as true" do
-  #     pending do
-  #       run("#t").should == "#t"
-  #     end
-  #   end
-  #
-  #   it "should have #f as false" do
-  #     pending do
-  #       run("#f").should == "#f"
-  #     end
-  #   end
-  # end
-  #
+  describe "booleans - #t and #f" do
+    it "should have #t as true" do
+      run("#t").should == "#t"
+    end
+
+    it "should have #f as false" do
+      run("#f").should == "#f"
+    end
+  end
+
   # describe "multiple objects" do
   #   it "should print two on two lines" do |variable|
   #     pending do
