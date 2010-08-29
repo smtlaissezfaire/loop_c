@@ -2,11 +2,8 @@
 #define LIST_C
 
 static Object printList(Object self) {
-  exitWithMessage(1, "printList: NotYetImplemented");
-  /*
   printf("(");
   printf(")");
-  */
 
   return self;
 }
@@ -16,7 +13,11 @@ static Object evalList(Object self) {
   Object tail = self->value.listValue->tail;
 
   if (strcmp(head->value.stringValue, "quote") == 0) {
-    return tail->value.listValue->head;
+    if (tail->value.listValue->head == NULL) { /* nil */
+      return tail;
+    } else {
+      return tail->value.listValue->head;
+    }
   } else {
     printf("UNKNOWN FUNCTION: %s", head->value.stringValue);
   }
@@ -43,9 +44,11 @@ static Object makeList() {
 
   if (token->type == tCLOSE_PAREN) {
     /* nil */
+    obj->value.listValue = makeCons(NULL, NULL);
   } else {
     putBackToken();
     head = read();
+
     obj->value.listValue = makeCons(head, makeList());
   }
 

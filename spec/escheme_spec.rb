@@ -92,12 +92,10 @@ describe "escheme" do
           run("(quote foo)").should == "'foo"
         end
 
-        # it "should output a list for a list" do
-        #   pending do
-        #     run("(quote ())").should == "()"
-        #   end
-        # end
-        #
+        it "should output a list for a list" do
+          run("(quote ())").should == "()"
+        end
+
         # it "should output the contents of a quoted list" do
         #   pending do
         #     run("(quote (foo bar baz))").should == "(foo bar baz)"
