@@ -1,3 +1,4 @@
+/*
 enum tokenTypes {
   tINT,
   tFLOAT,
@@ -7,6 +8,12 @@ enum tokenTypes {
   tBOOLEAN,
   tOPEN_PAREN,
   tCLOSE_PAREN
+};
+*/
+
+enum tokenTypes {
+  tINT,
+  tFLOAT
 };
 
 struct token {

@@ -1,9 +1,9 @@
-static long getValue(Object self) {
+static long getValueInt(Object self) {
   return self->value.intValue;
 }
 
 static Object printInt(Object self) {
-  printf("%lu", getValue(self));
+  printf("%lu", getValueInt(self));
   return self;
 }
 

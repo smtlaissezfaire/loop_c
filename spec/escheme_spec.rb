@@ -28,17 +28,13 @@ describe "escheme" do
       run("   2 ").should == "2"
     end
 
-    # it "should parse a floating point number" do
-    #   pending do
-    #     run("3.32").should == "3.320000"
-    #   end
-    # end
-    #
-    # it "should parse a different floating point number" do
-    #   pending do
-    #     run("270.999").should == "270.998993"
-    #   end
-    # end
+    it "should parse a floating point number" do
+      run("3.32").should == "3.320000"
+    end
+
+    it "should parse a different floating point number" do
+      run("270.999").should == "270.998993"
+    end
   end
 
   # describe "strings" do

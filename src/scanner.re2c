@@ -5,7 +5,7 @@
 #define YYCURSOR  end_of_match
 #define YYLIMIT   (str+length)
 #define YYFILL(n) {}
-/* #define YYMARKER  backtrack */
+#define YYMARKER  backtrack
 
 #define MAKE_TOKEN(TYPE, S, END) (makeToken((TYPE), (S), (END))); continue
 
@@ -46,9 +46,9 @@ Token *scan(string str) {
   string start = str;
   string end_of_match = str;
   string last_match = str;
-
+  string backtrack;
   int length = strlen(str);
-  /* string backtrack; */
+
 
   for(;;) {
     last_match = end_of_match;
@@ -57,9 +57,12 @@ Token *scan(string str) {
       re2c:indent:top = 2;
 
       int            = [0-9]+;
+      period         = ".";
+      float          = [0-9]* period [0-9]+;
       whitespace     = ([\ \t\n])*;
       EOF            = "\000";
 
+      float                              { MAKE_TOKEN(tFLOAT,       last_match,   end_of_match);   }
       int                                { MAKE_TOKEN(tINT,         last_match,   end_of_match);   }
       EOF                                { return firstToken; }
       whitespace                         { continue; }

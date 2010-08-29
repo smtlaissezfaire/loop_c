@@ -9,7 +9,8 @@ enum types {
 };
 
 typedef union {
-  long intValue;
+  long  intValue;
+  float floatValue;
 } oValue;
 
 struct sObject {

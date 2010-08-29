@@ -1,7 +1,9 @@
 #include "shared.h"
 #include "scanner.h"
 #include "escheme.h"
+
 #include "types/int.c"
+#include "types/float.c"
 
 static string source;
 static Token *currentToken  = NULL;
@@ -10,7 +12,7 @@ static Token *previousToken = NULL;
 static Token *getToken() {
   if (currentToken == NULL) {
     currentToken = scan(source);
-    previousToken = currentToken;
+    previousToken = NULL;
   } else {
     previousToken = currentToken;
     currentToken = currentToken->nextToken;
@@ -19,7 +21,25 @@ static Token *getToken() {
   return currentToken;
 }
 
+static Token *putBackToken() {
+  currentToken = previousToken;
+  return currentToken;
+}
+
 static Object read() {
+  Token *token = getToken();
+  putBackToken();
+
+  switch(token->type) {
+    case tINT:
+      return makeInt();
+    case tFLOAT:
+      return makeFloat();
+    default:
+      exitWithMessage(1, "default case in makeObject - couldn't make object.  INTERNAL ERROR");
+  }
+
+  /* just here to make the compiler happy */
   return makeInt();
 }
 
