@@ -16,7 +16,7 @@ static Object makeFloat() {
   Object obj   = malloc(sizeof(sObject));
 
   obj->type             = FLOAT;
-  obj->value.floatValue = atof(token->str);;
+  obj->value.floatValue = atof(token->str);
   obj->print            = &printFloat;
   obj->eval             = &evalFloat;
 
