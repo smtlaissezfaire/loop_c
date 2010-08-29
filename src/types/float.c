@@ -1,3 +1,6 @@
+#ifndef FLOAT_C
+#define FLOAT_C
+
 static float getValueFloat(Object self) {
   return self->value.floatValue;
 }
@@ -22,3 +25,5 @@ static Object makeFloat() {
 
   return obj;
 }
+
+#endif

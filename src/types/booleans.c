@@ -1,3 +1,6 @@
+#ifndef BOOLEANS_C
+#define BOOLEANS_C
+
 static Object printBoolean(Object self) {
   printf("#%c", self->value.booleanValue ? 't' : 'f');
   return self;
@@ -22,3 +25,5 @@ static Object makeBoolean() {
 
   return obj;
 }
+
+#endif

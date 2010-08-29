@@ -1,3 +1,6 @@
+#ifndef SCANNER_H
+#define SCANNER_H
+
 /*
 enum tokenTypes {
   tINT,
@@ -27,3 +30,5 @@ struct token {
 typedef struct token Token;
 
 Token *scan(string);
+
+#endif

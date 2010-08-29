@@ -1,3 +1,6 @@
+#ifndef ESCHEME_C
+#define ESCHEME_C
+
 #include "shared.h"
 #include "scanner.h"
 #include "escheme.h"
@@ -65,3 +68,5 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+
+#endif

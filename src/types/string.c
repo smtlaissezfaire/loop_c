@@ -1,3 +1,6 @@
+#ifndef STRING_C
+#define STRING_C
+
 static Object printString(Object self) {
   printf("\"%s\"", self->value.stringValue);
   return self;
@@ -18,3 +21,5 @@ static Object makeString() {
 
   return obj;
 }
+
+#endif

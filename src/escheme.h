@@ -1,3 +1,6 @@
+#ifndef ESCHEME_H
+#define ESCHEME_H
+
 enum types {
   INT,
   FLOAT,
@@ -26,3 +29,5 @@ typedef struct sObject sObject;
 typedef sObject*       Object;
 
 static Token * getToken();
+
+#endif

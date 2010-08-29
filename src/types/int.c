@@ -1,3 +1,6 @@
+#ifndef INT_C
+#define INT_C
+
 static long getValueInt(Object self) {
   return self->value.intValue;
 }
@@ -22,3 +25,5 @@ static Object makeInt() {
 
   return obj;
 }
+
+#endif
