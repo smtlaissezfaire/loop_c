@@ -44,7 +44,7 @@ static Object printList(Object self) {
           next->print(next);
         }
       } else {
-        puts("*** GOT HERE ***");
+        exitWithMessage(-2, "Internal error in printList");
         break;
       }
 

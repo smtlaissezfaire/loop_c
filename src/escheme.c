@@ -52,7 +52,7 @@ static Object read() {
       getToken(); /* skip the open paren */
       return makeList();
     default:
-      exitWithMessage(1, "default case in makeObject - couldn't make object.  INTERNAL ERROR");
+      exitWithMessage(-1, "default case in makeObject - couldn't make object.  INTERNAL ERROR");
   }
 
   /* just here to make the compiler happy */
