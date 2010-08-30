@@ -62,8 +62,13 @@ static Object evalList(Object self) {
 
   if (strcmp(fun_name, "quote") == 0) {
     return tail;
+  } else if (strcmp(fun_name, "car") == 0) {
+    Object fun_and_args = car(tail);
+    return car(fun_and_args->eval(fun_and_args));
   } else {
-    printf("UNKNOWN FUNCTION: %s", head->value.stringValue);
+    /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
+    printf("UNKNOWN FUNCTION: %s", fun_name);
+    exit(2);
   }
 
   return self;

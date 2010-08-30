@@ -114,26 +114,22 @@ describe "escheme" do
       end
     end
 
-    # describe "car" do
-    #   it "should be able to car a list" do
-    #     pending do
-    #       run("(car (quote (a b c)))").should == "a"
-    #     end
-    #   end
-    #
-    #   it "should be able to car a list" do
-    #     pending do
-    #       run("(car (quote (x y z)))").should == "x"
-    #     end
-    #   end
-    #
-    #   it "should raise an error on an empty list" do
-    #     pending do
-    #       run("(car (quote ()))").should == "ERROR!  Can't car an empty list"
-    #     end
-    #   end
-    # end
-    #
+    describe "car" do
+      it "should be able to car a list" do
+        run("(car (quote (a b c)))").should == "a"
+      end
+
+      it "should be able to car a different list" do
+        run("(car (quote (x y z)))").should == "x"
+      end
+
+      it "should raise an error on an empty list" do
+        pending do
+          run("(car (quote ()))").should == "ERROR!  Can't car an empty list"
+        end
+      end
+    end
+
     # describe "cdr" do
     #   it "should return the rest of the list" do
     #     pending do
