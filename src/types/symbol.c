@@ -2,7 +2,7 @@
 #define SYMBOL_C
 
 static Object printSymbol(Object self) {
-  printf("'%s", self->value.stringValue);
+  printf("%s", self->value.stringValue);
   return self;
 }
 

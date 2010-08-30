@@ -49,6 +49,7 @@ static Object read() {
     case tSYMBOL:
       return makeSymbol();
     case tOPEN_PAREN:
+      getToken(); /* skip the open paren */
       return makeList();
     default:
       exitWithMessage(1, "default case in makeObject - couldn't make object.  INTERNAL ERROR");
@@ -66,7 +67,15 @@ static void print(Object obj) {
   obj->print(obj);
 }
 
+static void allocate_globals() {
+  nil = malloc(sizeof(sObject));
+  nil->type = LIST;
+  nil->value.listValue = makeCons(NULL, NULL);
+}
+
 int main(int argc, char **argv) {
+  allocate_globals();
+
   if (argc >= 2) {
     source = argv[2];
     print(eval(read()));

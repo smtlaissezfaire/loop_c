@@ -89,17 +89,27 @@ describe "escheme" do
     describe "quoting" do
       describe "with (quote)" do
         it "should output a sym for a sym" do
-          run("(quote foo)").should == "'foo"
+          run("(quote foo)").should == "foo"
         end
 
         it "should output a list for a list" do
           run("(quote ())").should == "()"
         end
 
-        # it "should output the contents of a quoted list" do
-        #   pending do
-        #     run("(quote (foo bar baz))").should == "(foo bar baz)"
-        #   end
+        it "should output the contents of a quoted list" do
+          run("(quote (foo bar baz))").should == "(foo bar baz)"
+        end
+
+        it "should output the correct contents of multiple items" do
+          run("(quote (foo bar))").should == "(foo bar)"
+        end
+
+        it "should not be buggy..." do
+          run("(quote ((foo bar) (((()))) bar))").should == "((foo bar) (((()))) bar)"
+        end
+
+        # it "should throw an exception if more than one elment is given to the quote" do
+        #   run("(quote foo bar)")
         # end
       end
     end

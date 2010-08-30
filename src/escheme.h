@@ -42,4 +42,7 @@ static Token *putBackToken();
 static Object read();
 static Object eval();
 
+/* globals */
+Object nil;
+
 #endif
