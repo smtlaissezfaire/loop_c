@@ -8,6 +8,6 @@
 
 typedef char * string;
 
-void exitWithMessage(int, string);
+void exitWithMessage(signed int, string);
 
 #endif
