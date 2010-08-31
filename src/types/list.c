@@ -81,6 +81,10 @@ static List makeCons(Object head, Object tail) {
   return list;
 }
 
+void freeList(Object self) {
+  free(self);
+}
+
 static Object makeList() {
   Object head;
   Object obj;
@@ -95,9 +99,10 @@ static Object makeList() {
     obj = malloc(sizeof(sObject));
     obj->value.listValue = makeCons(head, makeList());
 
-    obj->type            = LIST;
-    obj->eval            = &evalList;
-    obj->print           = &printList;
+    obj->type  = LIST;
+    obj->eval  = &evalList;
+    obj->print = &printList;
+    obj->free  = &freeList;
 
     return obj;
   }

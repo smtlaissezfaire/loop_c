@@ -32,6 +32,7 @@ struct sObject {
   oValue value;
   struct sObject *(*print)(struct sObject *);
   struct sObject *(*eval)(struct sObject *);
+  void            (*free)(struct sObject *);
 };
 
 typedef struct sObject sObject;
