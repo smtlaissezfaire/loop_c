@@ -14,6 +14,10 @@ static bool parseBooleanToken(Token *token) {
   return (token->str[1] == 't') ? true : false;
 }
 
+void freeBoolean() {
+
+}
+
 static Object makeBoolean() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -22,6 +26,7 @@ static Object makeBoolean() {
   obj->value.booleanValue = parseBooleanToken(token);
   obj->print              = &printBoolean;
   obj->eval               = &evalBoolean;
+  obj->free               = &freeBoolean;
 
   return obj;
 }

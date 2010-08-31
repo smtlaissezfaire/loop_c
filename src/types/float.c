@@ -14,6 +14,10 @@ static Object evalFloat(Object self) {
   return self;
 }
 
+void freeFloat() {
+
+}
+
 static Object makeFloat() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -22,6 +26,7 @@ static Object makeFloat() {
   obj->value.floatValue = atof(token->str);
   obj->print            = &printFloat;
   obj->eval             = &evalFloat;
+  obj->free             = &freeFloat;
 
   return obj;
 }

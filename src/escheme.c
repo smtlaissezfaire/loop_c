@@ -63,8 +63,8 @@ static Object eval(Object obj) {
   return obj->eval(obj);
 }
 
-static void print(Object obj) {
-  obj->print(obj);
+static Object print(Object obj) {
+  return obj->print(obj);
 }
 
 static void allocate_globals() {
@@ -81,11 +81,16 @@ static void free_globals() {
 }
 
 int main(int argc, char **argv) {
+  Object repl_result;
+
   allocate_globals();
 
   if (argc >= 2) {
     source = argv[2];
-    print(eval(read()));
+    repl_result = eval(read());
+    print(repl_result);
+
+    repl_result->free(repl_result);
   }
 
   free_globals();

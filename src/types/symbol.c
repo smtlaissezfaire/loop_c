@@ -10,6 +10,10 @@ static Object evalSymbol(Object self) {
   return self;
 }
 
+void freeSymbol() {
+
+}
+
 static Object makeSymbol() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -18,6 +22,7 @@ static Object makeSymbol() {
   obj->value.stringValue = token->str;
   obj->print             = &printSymbol;
   obj->eval              = &evalSymbol;
+  obj->free              = &freeSymbol;
 
   return obj;
 }
