@@ -23,6 +23,8 @@ static Object makeInt() {
   obj->print          = &printInt;
   obj->eval           = &evalInt;
 
+  free(token);
+
   return obj;
 }
 
