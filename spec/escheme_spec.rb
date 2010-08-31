@@ -8,7 +8,9 @@ describe "escheme" do
       FileUtils.mkdir_p "spec/logs"
       out = `valgrind --log-file=spec/logs/valgrind.log bin/escheme -e "#{cmd}"`
 
-      File.read("spec/logs/valgrind.log").should =~ /ERROR SUMMARY: 0/
+      log = File.read("spec/logs/valgrind.log")
+      log.should =~ /ERROR SUMMARY: 0/
+      log.should =~ /definitely lost: 0 bytes in 0 blocks/
       out
     else
       `bin/escheme -e "#{cmd}"`
