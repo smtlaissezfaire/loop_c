@@ -2,11 +2,11 @@
 #define LIST_C
 
 static Object car(Object list) {
-  return list->value.listValue->head;
+  return list->head;
 }
 
 static Object cdr(Object list) {
-  return list->value.listValue->tail;
+  return list->tail;
 }
 
 static int empty_p(Object self) {
@@ -74,16 +74,21 @@ static Object evalList(Object self) {
   return self;
 }
 
-static List makeCons(Object head, Object tail) {
-  List list = malloc(sizeof(sList));
-  list->head = head;
-  list->tail = tail;
-  return list;
+static Object makeCons(Object head, Object tail) {
+  Object obj = malloc(sizeof(sObject));
+
+  obj->head = head;
+  obj->tail = tail;
+
+  obj->type  = LIST;
+  obj->eval  = &evalList;
+  obj->print = &printList;
+
+  return obj;
 }
 
 static Object makeList() {
   Object head;
-  Object obj;
   Token *token = getToken();
 
   if (token->type == tCLOSE_PAREN) {
@@ -92,14 +97,7 @@ static Object makeList() {
     putBackToken();
     head = read();
 
-    obj = malloc(sizeof(sObject));
-    obj->value.listValue = makeCons(head, makeList());
-
-    obj->type  = LIST;
-    obj->eval  = &evalList;
-    obj->print = &printList;
-
-    return obj;
+    return makeCons(head, makeList());
   }
 }
 

@@ -11,25 +11,18 @@ enum types {
   PROC
 };
 
-struct sList {
-  struct sObject *head;
-  struct sObject *tail;
-};
-
-typedef struct sList  sList;
-typedef struct sList* List;
-
 typedef union {
   long         intValue;
   float        floatValue;
   bool         booleanValue;
   string       stringValue;
-  List         listValue;
 } oValue;
 
 struct sObject {
   enum types type;
   oValue value;
+  struct sObject *head;
+  struct sObject *tail;
   struct sObject *(*print)(struct sObject *);
   struct sObject *(*eval)(struct sObject *);
 };

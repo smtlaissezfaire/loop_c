@@ -68,11 +68,7 @@ static Object print(Object obj) {
 }
 
 static void allocate_globals() {
-  nil = malloc(sizeof(sObject));
-  nil->type  = LIST;
-  nil->eval  = &evalList;
-  nil->print = &printList;
-  nil->value.listValue = makeCons(NULL, NULL);
+  nil = makeCons(NULL, NULL);
 }
 
 int main(int argc, char **argv) {
