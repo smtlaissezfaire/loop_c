@@ -6,7 +6,7 @@ describe "escheme" do
 
     if ENV['VALGRIND'] == "true"
       FileUtils.mkdir_p "spec/logs"
-      out = `valgrind --log-file=spec/logs/valgrind.log bin/escheme -e "#{cmd}"`
+      out = `valgrind --suppressions=./boehm-gc.suppressions --log-file=spec/logs/valgrind.log bin/escheme -e "#{cmd}"`
 
       log = File.read("spec/logs/valgrind.log")
       log.should =~ /ERROR SUMMARY: 0/
