@@ -76,15 +76,12 @@ static void allocate_globals() {
 }
 
 int main(int argc, char **argv) {
-  Object repl_result;
-
   GC_INIT();
   allocate_globals();
 
   if (argc >= 2) {
     source = argv[2];
-    repl_result = eval(read());
-    print(repl_result);
+    print(eval(read()));
   }
 
   return 0;
