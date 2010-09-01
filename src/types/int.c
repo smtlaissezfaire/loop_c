@@ -14,8 +14,7 @@ static Object evalInt(Object self) {
   return self;
 }
 
-void freeInt(Object self) {
-  free(self);
+void freeInt() {
 }
 
 static Object makeInt() {
@@ -27,8 +26,6 @@ static Object makeInt() {
   obj->print          = &printInt;
   obj->eval           = &evalInt;
   obj->free           = &freeInt;
-
-  free(token);
 
   return obj;
 }

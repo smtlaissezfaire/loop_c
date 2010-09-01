@@ -82,8 +82,6 @@ static List makeCons(Object head, Object tail) {
 }
 
 void freeList(Object self) {
-  free(self->value.listValue);
-  free(self);
 }
 
 static Object makeList() {

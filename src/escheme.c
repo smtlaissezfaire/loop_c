@@ -83,6 +83,7 @@ static void free_globals() {
 int main(int argc, char **argv) {
   Object repl_result;
 
+  GC_INIT();
   allocate_globals();
 
   if (argc >= 2) {

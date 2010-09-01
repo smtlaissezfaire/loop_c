@@ -7,7 +7,7 @@ compile: generate_tokenizer
 	$(CC) $(CFLAGS) -c shared.c && \
 	$(CC) $(CFLAGS) -c escheme.c && \
 	$(CC) $(CFLAGS) -c scanner.c && \
-	$(CC) $(CFLAGS) -o ./../bin/escheme shared.o escheme.o scanner.o && \
+	$(CC) $(CFLAGS) -o ./../bin/escheme shared.o escheme.o scanner.o -l gc && \
 	cd -
 
 clean:
