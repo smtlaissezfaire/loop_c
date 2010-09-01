@@ -1,1 +1,1 @@
-My second crack at a C-based scheme interpreter.
+My second crack at a C-based scheme interpreter, loosely based on the lisp interpreter found @ http://www.sonoma.edu/users/l/luvisi/sl3.c.
