@@ -97,7 +97,6 @@ static Object evalList(Object self) {
   } else if (strcmp(fun_name, "cdr") == 0) {
     Object fun_and_args = car(tail);
     Object result = fun_and_args->eval(fun_and_args);
-    //return cons(car(car(result)), cdr(car(result)));
     return cons(cdr(car(result)), nil);
   } else {
     /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
