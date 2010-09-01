@@ -68,7 +68,7 @@ static Object print(Object obj) {
 }
 
 static void allocate_globals() {
-  nil = makeCons(NULL, NULL);
+  nil = cons(NULL, NULL);
 }
 
 int main(int argc, char **argv) {

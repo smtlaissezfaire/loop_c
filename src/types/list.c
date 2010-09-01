@@ -1,12 +1,40 @@
 #ifndef LIST_C
 #define LIST_C
 
+static Object evalList(Object);
+static Object printList(Object);
+
 static Object car(Object list) {
-  return list->head;
+  Object head = list->head;
+
+  if (head == NULL) {
+    exitWithMessage(4, "car: expects argument of type <pair>; given ()");
+  }
+
+  return head;
 }
 
 static Object cdr(Object list) {
-  return list->tail;
+  Object tail = list->tail;
+
+  if (tail == NULL) {
+    exitWithMessage(5, "cdr: expects argument of type <pair>; given ()");
+  }
+
+  return tail;
+}
+
+static Object cons(Object head, Object tail) {
+  Object obj = malloc(sizeof(sObject));
+
+  obj->head = head;
+  obj->tail = tail;
+
+  obj->type  = LIST;
+  obj->eval  = &evalList;
+  obj->print = &printList;
+
+  return obj;
 }
 
 static int empty_p(Object self) {
@@ -64,7 +92,13 @@ static Object evalList(Object self) {
     return tail;
   } else if (strcmp(fun_name, "car") == 0) {
     Object fun_and_args = car(tail);
-    return car(fun_and_args->eval(fun_and_args));
+    Object result = fun_and_args->eval(fun_and_args);
+    return car(result);
+  } else if (strcmp(fun_name, "cdr") == 0) {
+    Object fun_and_args = car(tail);
+    Object result = fun_and_args->eval(fun_and_args);
+    //return cons(car(car(result)), cdr(car(result)));
+    return cons(cdr(car(result)), nil);
   } else {
     /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
     printf("UNKNOWN FUNCTION: %s", fun_name);
@@ -72,19 +106,6 @@ static Object evalList(Object self) {
   }
 
   return self;
-}
-
-static Object makeCons(Object head, Object tail) {
-  Object obj = malloc(sizeof(sObject));
-
-  obj->head = head;
-  obj->tail = tail;
-
-  obj->type  = LIST;
-  obj->eval  = &evalList;
-  obj->print = &printList;
-
-  return obj;
 }
 
 static Object makeList() {
@@ -97,7 +118,7 @@ static Object makeList() {
     putBackToken();
     head = read();
 
-    return makeCons(head, makeList());
+    return cons(head, makeList());
   }
 }
 

@@ -126,18 +126,22 @@ describe "escheme" do
       end
 
       it "should raise an error on an empty list" do
-        pending do
-          run("(car (quote ()))").should == "ERROR!  Can't car an empty list"
-        end
+        run("(car (quote ()))").should == "FATAL ERROR: car: expects argument of type <pair>; given ()"
       end
     end
 
-    # describe "cdr" do
-    #   it "should return the rest of the list" do
-    #     pending do
-    #       run("(cdr (quote (a b c)))").should == "(b c)"
-    #     end
-    #   end
-    # end
+    describe "cdr" do
+      it "should be the empty list when given one list element" do
+        run("(cdr (quote (a)))").should == "()"
+      end
+
+      it "should return the rest of the list, excluding the first item" do
+        run("(cdr (quote (a b c)))").should == "(b c)"
+      end
+
+      it "should raise an error on an empty list" do
+        run("(cdr (quote ()))").should == "FATAL ERROR: cdr: expects argument of type <pair>; given ()"
+      end
+    end
   end
 end
