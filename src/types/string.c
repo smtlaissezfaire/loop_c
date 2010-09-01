@@ -10,10 +10,6 @@ static Object evalString(Object self) {
   return self;
 }
 
-void freeString() {
-
-}
-
 static Object makeString() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -22,7 +18,6 @@ static Object makeString() {
   obj->value.stringValue = token->str;
   obj->print             = &printString;
   obj->eval              = &evalString;
-  obj->free              = &freeString;
 
   return obj;
 }

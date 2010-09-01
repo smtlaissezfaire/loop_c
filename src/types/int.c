@@ -14,9 +14,6 @@ static Object evalInt(Object self) {
   return self;
 }
 
-void freeInt() {
-}
-
 static Object makeInt() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -25,7 +22,6 @@ static Object makeInt() {
   obj->value.intValue = strtol(token->str, NULL, 10);
   obj->print          = &printInt;
   obj->eval           = &evalInt;
-  obj->free           = &freeInt;
 
   return obj;
 }
