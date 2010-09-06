@@ -159,3 +159,19 @@
    fun:allocate_globals
    fun:main
 }
+{
+  <>
+  Memcheck:Cond
+  fun:GC_is_black_listed
+  fun:GC_allochblk_nth
+  fun:GC_allochblk
+  fun:GC_new_hblk
+  fun:GC_allocobj
+  fun:GC_generic_malloc_inner
+  fun:GC_generic_malloc
+  fun:GC_core_malloc
+  fun:cons
+  fun:allocate_globals
+  fun:main
+}
+
