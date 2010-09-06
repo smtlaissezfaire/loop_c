@@ -1,9 +1,10 @@
 #ifndef STRING_C
 #define STRING_C
 
-static Object printString(Object self) {
-  printf("\"%s\"", self->value.stringValue);
-  return self;
+static string printString(Object self) {
+  string str;
+  asprintf(&str, "\"%s\"", self->value.stringValue);
+  return str;
 }
 
 static Object evalString(Object self) {

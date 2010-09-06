@@ -5,9 +5,10 @@ static float getValueFloat(Object self) {
   return self->value.floatValue;
 }
 
-static Object printFloat(Object self) {
-  printf("%f", getValueFloat(self));
-  return self;
+static string printFloat(Object self) {
+  string str;
+  asprintf(&str, "%f", getValueFloat(self));
+  return str;
 }
 
 static Object evalFloat(Object self) {

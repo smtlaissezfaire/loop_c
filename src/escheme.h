@@ -23,7 +23,7 @@ struct sObject {
   oValue value;
   struct sObject *head;
   struct sObject *tail;
-  struct sObject *(*print)(struct sObject *);
+          string (*print)(struct sObject *);
   struct sObject *(*eval)(struct sObject *);
 };
 

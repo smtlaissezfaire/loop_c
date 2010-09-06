@@ -2,7 +2,7 @@
 #define LIST_C
 
 static Object evalList(Object);
-static Object printList(Object);
+static string printList(Object);
 
 static Object car(Object list) {
   Object head = list->head;
@@ -45,31 +45,38 @@ static int list_p(Object obj) {
   return obj->type == LIST;
 }
 
-static Object printList(Object self) {
+static string alloc_strcat(string s1, string s2) {
+  s1 = realloc(s1, (strlen(s1) + strlen(s2) + 1) * sizeof(string));
+  strcat(s1, s2);
+  return s1;
+}
+
+static string printList(Object self) {
   Object head = car(self);
   Object next;
   int first = 1;
+  string str = calloc(2, sizeof(string));
 
   if (!list_p(head)) {
-    head->print(head);
+    return head->print(head);
   } else {
-    printf("(");
+    str = alloc_strcat(str, "(");
 
     next = head;
 
     for(;;) {
       if (list_p(next)) {
         if (empty_p(next)) {
-          printf(")");
+          str = alloc_strcat(str, ")");
           break;
         } else {
           if (first) {
             first = 0;
           } else {
-            printf(" ");
+            str = alloc_strcat(str, " ");
           }
 
-          next->print(next);
+          str = alloc_strcat(str, next->print(next));
         }
       } else {
         exitWithMessage(-2, "Internal error in printList");
@@ -78,9 +85,9 @@ static Object printList(Object self) {
 
       next = cdr(next);
     }
-  }
 
-  return self;
+    return str;
+  }
 }
 
 static Object evalList(Object self) {

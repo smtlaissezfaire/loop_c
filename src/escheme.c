@@ -63,8 +63,9 @@ static Object eval(Object obj) {
   return obj->eval(obj);
 }
 
-static Object print(Object obj) {
-  return obj->print(obj);
+static void print(Object obj) {
+  string str = obj->print(obj);
+  printf("%s", str);
 }
 
 static void allocate_globals() {

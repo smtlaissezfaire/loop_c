@@ -1,9 +1,10 @@
 #ifndef BOOLEANS_C
 #define BOOLEANS_C
 
-static Object printBoolean(Object self) {
-  printf("#%c", self->value.booleanValue ? 't' : 'f');
-  return self;
+static string printBoolean(Object self) {
+  string str;
+  asprintf(&str, "#%c", self->value.booleanValue ? 't' : 'f');
+  return str;
 }
 
 static Object evalBoolean(Object self) {

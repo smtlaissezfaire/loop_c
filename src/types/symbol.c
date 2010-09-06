@@ -1,9 +1,10 @@
 #ifndef SYMBOL_C
 #define SYMBOL_C
 
-static Object printSymbol(Object self) {
-  printf("%s", self->value.stringValue);
-  return self;
+static string printSymbol(Object self) {
+  string str;
+  asprintf(&str, "%s", self->value.stringValue);
+  return str;
 }
 
 static Object evalSymbol(Object self) {

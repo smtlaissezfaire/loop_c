@@ -5,9 +5,10 @@ static long getValueInt(Object self) {
   return self->value.intValue;
 }
 
-static Object printInt(Object self) {
-  printf("%lu", getValueInt(self));
-  return self;
+static string printInt(Object self) {
+  string str;
+  asprintf(&str, "%lu", getValueInt(self));
+  return str;
 }
 
 static Object evalInt(Object self) {
