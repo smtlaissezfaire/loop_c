@@ -62,7 +62,7 @@ static string printList(Object self) {
 
   str = alloc_strcat(str, "(");
 
-  for(next = self ; ; next = cdr(next)) {
+  for (next = self ;;) {
     if (empty_p(next)) {
       str = alloc_strcat(str, ")");
       break;
@@ -75,8 +75,12 @@ static string printList(Object self) {
 
       if (next->type == LIST) {
         str = alloc_strcat(str, car(next)->print(car(next)));
+        next = cdr(next);
       } else {
+        str = alloc_strcat(str, ". ");
         str = alloc_strcat(str, next->print(next));
+        str = alloc_strcat(str, ")");
+        break;
       }
     }
   }

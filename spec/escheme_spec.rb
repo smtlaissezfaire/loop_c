@@ -159,6 +159,14 @@ describe "escheme" do
         run("(cons (quote (a b))
                    (quote (a)))").should == "((a b) a)"
       end
+
+      it "should be able to make a pair" do
+        run("(cons 1 2)").should == "(1 . 2)"
+      end
+
+      it "should make two sets of pairs" do
+        run("(cons 1 (cons 2 3))").should == "(1 2 . 3)"
+      end
     end
   end
 end
