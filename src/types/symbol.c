@@ -2,8 +2,17 @@
 #define SYMBOL_C
 
 static string printSymbol(Object self) {
-  string str;
-  asprintf(&str, "%s", self->value.stringValue);
+  size_t result;
+  string str = calloc(MAX_SPRINTF_LENGTH, sizeof(string));
+  string value = self->value.stringValue;
+
+  result = snprintf(str, MAX_SPRINTF_LENGTH, "%s", value);
+
+  if (result > MAX_SPRINTF_LENGTH) {
+    str = calloc(result, sizeof(string));
+    snprintf(str, result, "%s", value);
+  }
+
   return str;
 }
 

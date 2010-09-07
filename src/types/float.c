@@ -6,8 +6,17 @@ static float getValueFloat(Object self) {
 }
 
 static string printFloat(Object self) {
-  string str;
-  asprintf(&str, "%f", getValueFloat(self));
+  size_t result;
+  string str = calloc(MAX_SPRINTF_LENGTH, sizeof(string));
+  float value = getValueFloat(self);
+
+  result = snprintf(str, MAX_SPRINTF_LENGTH, "%f", value);
+
+  if (result > MAX_SPRINTF_LENGTH) {
+    str = calloc(result, sizeof(string));
+    snprintf(str, result, "%f", value);
+  }
+
   return str;
 }
 

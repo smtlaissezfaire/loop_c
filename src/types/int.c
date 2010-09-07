@@ -6,8 +6,17 @@ static long getValueInt(Object self) {
 }
 
 static string printInt(Object self) {
-  string str;
-  asprintf(&str, "%lu", getValueInt(self));
+  size_t result;
+  string str = calloc(MAX_SPRINTF_LENGTH, sizeof(string));
+  long value = getValueInt(self);
+
+  result = snprintf(str, MAX_SPRINTF_LENGTH, "%lu", value);
+
+  if (result > MAX_SPRINTF_LENGTH) {
+    str = calloc(result, sizeof(string));
+    snprintf(str, result, "%lu", value);
+  }
+
   return str;
 }
 
