@@ -1,10 +1,11 @@
 #ifndef BOOLEANS_C
 #define BOOLEANS_C
 
+static string trueString = "#t";
+static string falseString = "#f";
+
 static string printBoolean(Object self) {
-  string str;
-  asprintf(&str, "#%c", self->value.booleanValue ? 't' : 'f');
-  return str;
+  return(self->value.booleanValue ? trueString : falseString);
 }
 
 static Object evalBoolean(Object self) {
