@@ -1,20 +1,7 @@
 #ifndef ESCHEME_C
 #define ESCHEME_C
 
-#include "shared.h"
-#include "scanner.h"
 #include "escheme.h"
-
-#include "types/int.c"
-#include "types/float.c"
-#include "types/booleans.c"
-#include "types/string.c"
-#include "types/list.c"
-#include "types/symbol.c"
-
-static string source;
-static Token *currentToken  = NULL;
-static Token *previousToken = NULL;
 
 static Token *getToken() {
   if (currentToken == NULL) {
@@ -72,9 +59,13 @@ static void allocate_globals() {
   nil = cons(NULL, NULL);
 }
 
-int main(int argc, char **argv) {
+static void ds_start() {
   GC_INIT();
   allocate_globals();
+}
+
+int main(int argc, char **argv) {
+  ds_start();
 
   if (argc >= 2) {
     source = argv[2];
