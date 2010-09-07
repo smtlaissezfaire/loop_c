@@ -52,42 +52,36 @@ static string alloc_strcat(string s1, string s2) {
 }
 
 static string printList(Object self) {
-  Object head = car(self);
   Object next;
   int first = 1;
   string str = calloc(2, sizeof(string));
 
-  if (!list_p(head)) {
-    return head->print(head);
-  } else {
-    str = alloc_strcat(str, "(");
+  if (!list_p(self)) {
+    exitWithMessage(-2, "Internal error in printList");
+  }
 
-    next = head;
+  str = alloc_strcat(str, "(");
 
-    for(;;) {
-      if (list_p(next)) {
-        if (empty_p(next)) {
-          str = alloc_strcat(str, ")");
-          break;
-        } else {
-          if (first) {
-            first = 0;
-          } else {
-            str = alloc_strcat(str, " ");
-          }
-
-          str = alloc_strcat(str, next->print(next));
-        }
+  for(next = self ; ; next = cdr(next)) {
+    if (empty_p(next)) {
+      str = alloc_strcat(str, ")");
+      break;
+    } else {
+      if (first) {
+        first = 0;
       } else {
-        exitWithMessage(-2, "Internal error in printList");
-        break;
+        str = alloc_strcat(str, " ");
       }
 
-      next = cdr(next);
+      if (next->type == LIST) {
+        str = alloc_strcat(str, car(next)->print(car(next)));
+      } else {
+        str = alloc_strcat(str, next->print(next));
+      }
     }
-
-    return str;
   }
+
+  return str;
 }
 
 static Object evalList(Object self) {
@@ -96,7 +90,7 @@ static Object evalList(Object self) {
   string fun_name = head->value.stringValue;
 
   if (strcmp(fun_name, "quote") == 0) {
-    return tail;
+    return car(tail);
   } else if (strcmp(fun_name, "car") == 0) {
     Object fun_and_args = car(tail);
     Object result = fun_and_args->eval(fun_and_args);
@@ -104,7 +98,13 @@ static Object evalList(Object self) {
   } else if (strcmp(fun_name, "cdr") == 0) {
     Object fun_and_args = car(tail);
     Object result = fun_and_args->eval(fun_and_args);
-    return cons(cdr(car(result)), nil);
+    return cdr(result);
+  } else if (strcmp(fun_name, "cons") == 0) {
+    Object fun_and_args = car(tail);
+    Object result = fun_and_args->eval(fun_and_args);
+    Object second_arg_and_fun = car(cdr(tail));
+
+    return cons(result, second_arg_and_fun->eval(second_arg_and_fun));
   } else {
     /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
     printf("UNKNOWN FUNCTION: %s", fun_name);

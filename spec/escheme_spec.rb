@@ -143,5 +143,22 @@ describe "escheme" do
         run("(cdr (quote ()))").should == "FATAL ERROR: cdr: expects argument of type <pair>; given ()"
       end
     end
+
+    describe "cons" do
+      it "should be able to add an element to an empty list" do
+        run("(cons (quote a)
+                   (quote ()))").should == "(a)"
+      end
+
+      it "should be able to add an element to a list with one element" do
+        run("(cons (quote a)
+                   (quote (b)))").should == "(a b)"
+      end
+
+      it "should be able to cons a list onto another list" do
+        run("(cons (quote (a b))
+                   (quote (a)))").should == "((a b) a)"
+      end
+    end
   end
 end
