@@ -25,7 +25,7 @@ int main() {
   while (fgets(buf, REPL_STRING_LENGTH, stdin) != NULL) {
     source = buf;
 
-    if (strcmp(source, ".quit") == 0) {
+    if (strcmp(source, ".quit\n") == 0) {
       break;
     }
 
