@@ -8,7 +8,9 @@ compile: generate_tokenizer
 	$(CC) $(CFLAGS) -c escheme.c && \
 	$(CC) $(CFLAGS) -c scanner.c && \
 	$(CC) $(CFLAGS) -c main.c    && \
-	$(CC) $(CFLAGS) -o ./../bin/escheme shared.o escheme.o scanner.o main.o -l gc && \
+	$(CC) $(CFLAGS) -c repl.c    && \
+	$(CC) $(CFLAGS) -o ./../bin/escheme 			shared.o escheme.o scanner.o main.o -l gc && \
+	$(CC) $(CFLAGS) -o ./../bin/escheme-repl 	shared.o escheme.o scanner.o repl.o -l gc && \
 	cd -
 
 clean:
