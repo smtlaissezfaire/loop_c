@@ -12,8 +12,8 @@
 
 #define MAKE_TOKEN(TYPE, S, END) (makeToken((TYPE), (S), (END))); continue
 
-Token *firstToken = NULL;
-Token *lastToken  = NULL;
+static Token *firstToken;
+static Token *lastToken;
 
 static string copyString(string start, string end) {
   string str = calloc(end-start+1, sizeof(char));
@@ -46,11 +46,13 @@ static string parseError(string code) {
 }
 
 Token *scan(string str) {
-  string start = str;
+  string start        = str;
   string end_of_match = str;
-  string last_match = str;
-  string backtrack;
-  int length = strlen(str);
+  string last_match   = str;
+  string backtrack    = NULL;
+  int length          = strlen(str);
+  firstToken          = NULL;
+  lastToken           = NULL;
 
   for(;;) {
     last_match = end_of_match;
