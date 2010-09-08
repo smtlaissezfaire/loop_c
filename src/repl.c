@@ -23,9 +23,9 @@ int main() {
   repl_prompt();
 
   while (fgets(buf, REPL_STRING_LENGTH, stdin) != NULL) {
-    source = buf;
+    set_source(buf);
 
-    if (strcmp(source, ".quit\n") == 0) {
+    if (strcmp(buf, ".quit\n") == 0) {
       break;
     }
 

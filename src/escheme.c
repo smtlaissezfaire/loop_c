@@ -3,10 +3,11 @@
 
 #include "escheme.h"
 
-static Token *currentToken = NULL;
-static Token *previousToken = NULL;
+static Token *currentToken;
+static Token *previousToken;
 static Token *getToken();
 static Token *putBackToken();
+static string source;
 
 #include "types/int.c"
 #include "types/float.c"
@@ -74,6 +75,12 @@ static void allocate_globals() {
 void ds_start() {
   GC_INIT();
   allocate_globals();
+}
+
+void set_source(string src) {
+  source = src;
+  currentToken = NULL;
+  previousToken = NULL;
 }
 
 #endif

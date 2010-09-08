@@ -43,10 +43,9 @@ Object read();
 Object eval();
 void print();
 void ds_start();
+void set_source();
 
 /* globals */
 Object nil;
-
-string source;
 
 #endif

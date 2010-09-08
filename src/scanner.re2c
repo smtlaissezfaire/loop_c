@@ -52,7 +52,6 @@ Token *scan(string str) {
   string backtrack;
   int length = strlen(str);
 
-
   for(;;) {
     last_match = end_of_match;
 

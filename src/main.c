@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
   ds_start();
 
   if (argc >= 2) {
-    source = argv[2];
+    set_source(argv[2]);
     print(eval(read()));
   }
 
