@@ -4,6 +4,12 @@
 #include "shared.h"
 #include "scanner.h"
 
+/* this is to compensate for issues with asprintf
+calling the generic malloc, not the malloc defined by the bohem GC
+
+See http://stackoverflow.com/questions/3655031/how-to-use-asprintf-with-the-boehm-gc/3655083#3655083 */
+#define MAX_SPRINTF_LENGTH (size_t)12
+
 enum types {
   INT,
   FLOAT,
@@ -33,30 +39,14 @@ struct sObject {
 typedef struct sObject sObject;
 typedef sObject*       Object;
 
-static Token *getToken();
-static Token *putBackToken();
-static Object read();
-static Object eval();
+Object read();
+Object eval();
+void print();
+void ds_start();
 
 /* globals */
 Object nil;
 
-
-/* this is to compensate for issues with asprintf
-calling the generic malloc, not the malloc defined by the bohem GC
-
-See http://stackoverflow.com/questions/3655031/how-to-use-asprintf-with-the-boehm-gc/3655083#3655083 */
-#define MAX_SPRINTF_LENGTH (size_t)12
-
-#include "types/int.c"
-#include "types/float.c"
-#include "types/booleans.c"
-#include "types/string.c"
-#include "types/list.c"
-#include "types/symbol.c"
-
-static string source;
-static Token *currentToken  = NULL;
-static Token *previousToken = NULL;
+string source;
 
 #endif

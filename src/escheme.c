@@ -3,6 +3,18 @@
 
 #include "escheme.h"
 
+static Token *currentToken = NULL;
+static Token *previousToken = NULL;
+static Token *getToken();
+static Token *putBackToken();
+
+#include "types/int.c"
+#include "types/float.c"
+#include "types/booleans.c"
+#include "types/string.c"
+#include "types/list.c"
+#include "types/symbol.c"
+
 static Token *getToken() {
   if (currentToken == NULL) {
     currentToken = scan(source);
@@ -20,7 +32,7 @@ static Token *putBackToken() {
   return currentToken;
 }
 
-static Object read() {
+Object read() {
   Token *token = getToken();
   putBackToken();
 
@@ -46,11 +58,11 @@ static Object read() {
   return makeInt();
 }
 
-static Object eval(Object obj) {
+Object eval(Object obj) {
   return obj->eval(obj);
 }
 
-static void print(Object obj) {
+void print(Object obj) {
   string str = obj->print(obj);
   printf("%s", str);
 }
@@ -59,20 +71,9 @@ static void allocate_globals() {
   nil = cons(NULL, NULL);
 }
 
-static void ds_start() {
+void ds_start() {
   GC_INIT();
   allocate_globals();
-}
-
-int main(int argc, char **argv) {
-  ds_start();
-
-  if (argc >= 2) {
-    source = argv[2];
-    print(eval(read()));
-  }
-
-  return 0;
 }
 
 #endif
