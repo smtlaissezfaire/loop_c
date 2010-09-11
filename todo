@@ -1,0 +1,6 @@
+high priority:
+- lambda
+- function calling
+
+low priority:
+- big numbers (how do other implementations do this)?
