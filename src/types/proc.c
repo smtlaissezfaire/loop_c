@@ -5,7 +5,7 @@ static Object evalProc(Object self) {
   return eval(self->body);
 }
 
-static string printProc(Object self) {
+static string printProc() {
   return "#<proc>";
 }
 

@@ -64,7 +64,7 @@ Object eval(Object obj) {
   return obj->eval(obj);
 }
 
-Object apply(Object fun, Object applied_params) {
+Object apply(Object fun) {
   return fun->eval(fun);
 }
 
