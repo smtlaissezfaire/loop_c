@@ -18,10 +18,6 @@ static string printSymbol(Object self) {
   return str;
 }
 
-static Object evalSymbol(Object self) {
-  return self;
-}
-
 static Object makeSymbol() {
   Object obj = NULL;
   string str = getToken()->str;
@@ -33,7 +29,7 @@ static Object makeSymbol() {
     obj->type              = SYMBOL;
     obj->value.stringValue = str;
     obj->print             = &printSymbol;
-    obj->eval              = &evalSymbol;
+    obj->eval              = &evalPrimtive;
 
     HASH_ADD_KEYPTR(hh, symbol_table, str, strlen(str), obj);
   }

@@ -20,10 +20,6 @@ static string printInt(Object self) {
   return str;
 }
 
-static Object evalInt(Object self) {
-  return self;
-}
-
 static Object makeInt() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -31,7 +27,7 @@ static Object makeInt() {
   obj->type           = INT;
   obj->value.intValue = strtol(token->str, NULL, 10);
   obj->print          = &printInt;
-  obj->eval           = &evalInt;
+  obj->eval           = &evalPrimtive;
 
   return obj;
 }

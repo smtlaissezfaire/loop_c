@@ -20,10 +20,6 @@ static string printFloat(Object self) {
   return str;
 }
 
-static Object evalFloat(Object self) {
-  return self;
-}
-
 static Object makeFloat() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -31,7 +27,7 @@ static Object makeFloat() {
   obj->type             = FLOAT;
   obj->value.floatValue = atof(token->str);
   obj->print            = &printFloat;
-  obj->eval             = &evalFloat;
+  obj->eval             = &evalPrimtive;
 
   return obj;
 }

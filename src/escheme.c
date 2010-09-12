@@ -9,6 +9,7 @@ static Token *getToken();
 static Token *putBackToken();
 static string source;
 
+#include "types/primitives.c"
 #include "types/int.c"
 #include "types/float.c"
 #include "types/booleans.c"

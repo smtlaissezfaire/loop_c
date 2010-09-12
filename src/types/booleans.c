@@ -1,10 +1,6 @@
 #ifndef BOOLEANS_C
 #define BOOLEANS_C
 
-static Object evalBoolean(Object self) {
-  return self;
-}
-
 static string printBooleanTrue() {
   return "#t";
 }
@@ -18,7 +14,7 @@ static Object makePrimitiveBoolean(bool value) {
 
   obj->type               = BOOLEAN;
   obj->value.booleanValue = value;
-  obj->eval               = &evalBoolean;
+  obj->eval               = &evalPrimtive;
 
   if (value == true) {
     obj->print = &printBooleanTrue;

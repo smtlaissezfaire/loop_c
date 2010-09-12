@@ -16,10 +16,6 @@ static string printString(Object self) {
   return str;
 }
 
-static Object evalString(Object self) {
-  return self;
-}
-
 static Object makeString() {
   Token *token = getToken();
   Object obj   = malloc(sizeof(sObject));
@@ -27,7 +23,7 @@ static Object makeString() {
   obj->type              = STRING;
   obj->value.stringValue = token->str;
   obj->print             = &printString;
-  obj->eval              = &evalString;
+  obj->eval              = &evalPrimtive;
 
   return obj;
 }
