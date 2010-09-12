@@ -91,29 +91,43 @@ static string printList(Object self) {
 static Object evalList(Object self) {
   Object head = car(self);
   Object tail = cdr(self);
-  string fun_name = head->value.stringValue;
+  Object fun;
+  Object args;
+  string fun_name;
 
-  if (strcmp(fun_name, "quote") == 0) {
-    return car(tail);
-  } else if (strcmp(fun_name, "car") == 0) {
-    Object fun_and_args = car(tail);
-    Object result = fun_and_args->eval(fun_and_args);
-    return car(result);
-  } else if (strcmp(fun_name, "cdr") == 0) {
-    Object fun_and_args = car(tail);
-    Object result = fun_and_args->eval(fun_and_args);
-    return cdr(result);
-  } else if (strcmp(fun_name, "cons") == 0) {
-    Object fun_and_args = car(tail);
-    Object result = fun_and_args->eval(fun_and_args);
-    Object second_arg_and_fun = car(cdr(tail));
-
-    return cons(result, second_arg_and_fun->eval(second_arg_and_fun));
+  if (head->type == LIST) {
+    fun = eval(head);
+    args = tail;
+    return apply(fun, args);
   } else {
-    /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
-    printf("UNKNOWN FUNCTION: %s", fun_name);
-    exit(2);
+    fun_name = head->value.stringValue;
+
+    if (strcmp(fun_name, "quote") == 0) {
+      return car(tail);
+    } else if (strcmp(fun_name, "car") == 0) {
+      Object fun_and_args = car(tail);
+      Object result = fun_and_args->eval(fun_and_args);
+      return car(result);
+    } else if (strcmp(fun_name, "cdr") == 0) {
+      Object fun_and_args = car(tail);
+      Object result = fun_and_args->eval(fun_and_args);
+      return cdr(result);
+    } else if (strcmp(fun_name, "cons") == 0) {
+      Object fun_and_args = car(tail);
+      Object result = fun_and_args->eval(fun_and_args);
+      Object second_arg_and_fun = car(cdr(tail));
+      return cons(result, second_arg_and_fun->eval(second_arg_and_fun));
+    } else if (strcmp(fun_name, "lambda") == 0) {
+      Object formal_args = car(tail);
+      Object body        = car(cdr(tail));
+      return makeProc(formal_args, body);
+    } else {
+      /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
+      printf("UNKNOWN FUNCTION: %s", fun_name);
+      exit(2);
+    }
   }
+
 
   return self;
 }

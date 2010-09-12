@@ -168,5 +168,25 @@ describe "escheme" do
         run("(cons 1 (cons 2 3))").should == "(1 2 . 3)"
       end
     end
+
+    describe "defining functions + calling them" do
+      it "should be able to print a function" do
+        run("(lambda () 10)").should == "#<proc>"
+      end
+
+      it "should be able to create a function and call it" do
+        run("((lambda () 10))").should == "10"
+      end
+
+      it "should return the correct value" do
+        run("((lambda () 20))").should == "20"
+      end
+
+      it "should be able to pass a value + return it" do
+        pending do
+          run("((lambda (x) x) 20)").should == "20"
+        end
+      end
+    end
   end
 end

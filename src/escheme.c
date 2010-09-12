@@ -13,8 +13,9 @@ static string source;
 #include "types/float.c"
 #include "types/booleans.c"
 #include "types/string.c"
-#include "types/list.c"
 #include "types/symbol.c"
+#include "types/proc.c"
+#include "types/list.c"
 
 static Token *getToken() {
   if (currentToken == NULL) {
@@ -61,6 +62,10 @@ Object read() {
 
 Object eval(Object obj) {
   return obj->eval(obj);
+}
+
+Object apply(Object fun, Object applied_params) {
+  return fun->eval(fun);
 }
 
 void print(Object obj) {

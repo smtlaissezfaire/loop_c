@@ -32,6 +32,8 @@ struct sObject {
   oValue value;
   struct sObject *head;
   struct sObject *tail;
+  struct sObject *formal_args;
+  struct sObject *body;
           string (*print)(struct sObject *);
   struct sObject *(*eval)(struct sObject *);
 };
@@ -42,6 +44,7 @@ typedef sObject*       Object;
 Object read();
 Object eval();
 void print();
+Object apply();
 void ds_start();
 void set_source();
 
