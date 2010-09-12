@@ -23,7 +23,7 @@ static Object makeString() {
   obj->type              = STRING;
   obj->value.stringValue = token->str;
   obj->print             = &printString;
-  obj->eval              = &evalPrimtive;
+  obj->eval              = &evalPrimitive;
 
   return obj;
 }

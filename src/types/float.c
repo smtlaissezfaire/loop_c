@@ -27,7 +27,7 @@ static Object makeFloat() {
   obj->type             = FLOAT;
   obj->value.floatValue = atof(token->str);
   obj->print            = &printFloat;
-  obj->eval             = &evalPrimtive;
+  obj->eval             = &evalPrimitive;
 
   return obj;
 }

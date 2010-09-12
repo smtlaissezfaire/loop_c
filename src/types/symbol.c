@@ -29,7 +29,7 @@ static Object makeSymbol() {
     obj->type              = SYMBOL;
     obj->value.stringValue = str;
     obj->print             = &printSymbol;
-    obj->eval              = &evalPrimtive;
+    obj->eval              = &evalPrimitive;
 
     HASH_ADD_KEYPTR(hh, symbol_table, str, strlen(str), obj);
   }

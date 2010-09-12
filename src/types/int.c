@@ -27,7 +27,7 @@ static Object makeInt() {
   obj->type           = INT;
   obj->value.intValue = strtol(token->str, NULL, 10);
   obj->print          = &printInt;
-  obj->eval           = &evalPrimtive;
+  obj->eval           = &evalPrimitive;
 
   return obj;
 }

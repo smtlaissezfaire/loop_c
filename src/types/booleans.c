@@ -14,7 +14,7 @@ static Object makePrimitiveBoolean(bool value) {
 
   obj->type               = BOOLEAN;
   obj->value.booleanValue = value;
-  obj->eval               = &evalPrimtive;
+  obj->eval               = &evalPrimitive;
 
   if (value == true) {
     obj->print = &printBooleanTrue;
