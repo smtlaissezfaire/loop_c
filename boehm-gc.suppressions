@@ -174,4 +174,179 @@
   fun:allocate_globals
   fun:main
 }
-
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_push_all_eager
+   fun:GC_with_callee_saves_pushed
+   fun:GC_push_roots
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_push_all_eager
+   fun:GC_with_callee_saves_pushed
+   fun:GC_push_roots
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:GC_mark_and_push_stack
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_mark_and_push_stack
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:GC_mark_and_push_stack
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:GC_find_header
+   fun:GC_add_to_black_list_stack
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_find_header
+   fun:GC_add_to_black_list_stack
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:GC_find_header
+   fun:GC_add_to_black_list_stack
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:GC_add_to_black_list_stack
+   fun:GC_push_all_eager
+   fun:GC_push_all_stacks
+   fun:GC_mark_some
+   fun:GC_stopped_mark
+   fun:GC_try_to_collect_inner
+   fun:GC_init_inner
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_is_black_listed
+   fun:GC_allochblk_nth
+   fun:GC_allochblk
+   fun:GC_new_hblk
+   fun:GC_allocobj
+   fun:GC_generic_malloc_inner
+   fun:GC_generic_malloc
+   fun:GC_core_malloc
+   fun:cons
+   fun:allocate_globals
+   fun:ds_start
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:GC_is_black_listed
+   fun:GC_allochblk_nth
+   fun:GC_allochblk
+   fun:GC_new_hblk
+   fun:GC_allocobj
+   fun:GC_generic_malloc_inner
+   fun:GC_generic_malloc
+   fun:GC_core_malloc
+   fun:cons
+   fun:allocate_globals
+   fun:ds_start
+   fun:main
+}
