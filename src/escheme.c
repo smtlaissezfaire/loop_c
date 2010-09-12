@@ -73,6 +73,10 @@ void print(Object obj) {
   printf("%s", str);
 }
 
+Object isEqual(Object o1, Object o2) {
+  return o1 == o2 ? booleanTrue : booleanFalse;
+}
+
 static void allocate_globals() {
   nil          = cons(NULL, NULL);
   booleanTrue  = makePrimitiveBoolean(true);

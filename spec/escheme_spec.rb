@@ -188,5 +188,23 @@ describe "escheme" do
         end
       end
     end
+
+    describe "equality with equal?" do
+      it "should be true with true == true" do
+        run("(equal? #t #t)").should == "#t"
+      end
+
+      it "should be true with false equal? false" do
+        run("(equal? #f #f)").should == "#t"
+      end
+
+      it "should be false between different boolean types" do
+        run("(equal? #f #t)").should == "#f"
+      end
+
+      it "should be false with different numbers" do
+        run("(equal? 1 2)").should == "#f"
+      end
+    end
   end
 end

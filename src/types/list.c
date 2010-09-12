@@ -121,6 +121,8 @@ static Object evalList(Object self) {
       Object formal_args = car(tail);
       Object body        = car(cdr(tail));
       return makeProc(formal_args, body);
+    } else if (strcmp(fun_name, "equal?") == 0) {
+      return isEqual(eval(car(tail)), eval(car(cdr(tail))));
     } else {
       /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
       printf("UNKNOWN FUNCTION: %s", fun_name);

@@ -46,6 +46,7 @@ Object read();
 Object eval();
 void print();
 Object apply();
+Object isEqual();
 void ds_start();
 void set_source();
 
