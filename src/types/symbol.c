@@ -1,6 +1,8 @@
 #ifndef SYMBOL_C
 #define SYMBOL_C
 
+static Object symbol_table = NULL;
+
 static string printSymbol(Object self) {
   size_t result;
   string str = calloc(MAX_SPRINTF_LENGTH, sizeof(string));
@@ -21,13 +23,20 @@ static Object evalSymbol(Object self) {
 }
 
 static Object makeSymbol() {
-  Token *token = getToken();
-  Object obj   = malloc(sizeof(sObject));
+  Object obj = NULL;
+  string str = getToken()->str;
 
-  obj->type              = SYMBOL;
-  obj->value.stringValue = token->str;
-  obj->print             = &printSymbol;
-  obj->eval              = &evalSymbol;
+  HASH_FIND_STR(symbol_table, str, obj);
+
+  if (!obj) {
+    obj = malloc(sizeof(sObject));
+    obj->type              = SYMBOL;
+    obj->value.stringValue = str;
+    obj->print             = &printSymbol;
+    obj->eval              = &evalSymbol;
+
+    HASH_ADD_KEYPTR(hh, symbol_table, str, strlen(str), obj);
+  }
 
   return obj;
 }

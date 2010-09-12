@@ -29,6 +29,8 @@ typedef union {
 } oValue;
 
 struct sObject {
+  UT_hash_handle hh;
+
   enum types type;
   oValue value;
   struct sObject *head;

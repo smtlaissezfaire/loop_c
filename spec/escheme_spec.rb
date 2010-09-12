@@ -205,6 +205,14 @@ describe "escheme" do
       it "should be false with different numbers" do
         run("(equal? 1 2)").should == "#f"
       end
+
+      it "should be true between two symbols with the same name" do
+        run("(equal? (quote foo) (quote foo))").should == "#t"
+      end
+
+      it "should be false between different symbols" do
+        run("(equal? (quote foo) (quote bar))").should == "#f"
+      end
     end
   end
 end
