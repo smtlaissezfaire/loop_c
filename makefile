@@ -1,16 +1,18 @@
-CC     = gcc
-CFLAGS = -W -Wall -g -c99 -pedantic
+CC            = gcc
+CFLAGS        = -W -Wall -g -c99 -pedantic
+INCLUDE_PATHS = -I vendor/uthash-1.9.1/src
+LIBRARIES     = -l gc
 
 compile: generate_tokenizer
 	mkdir -p bin && \
 	cd src && \
-	$(CC) $(CFLAGS) -c shared.c  && \
-	$(CC) $(CFLAGS) -c escheme.c && \
-	$(CC) $(CFLAGS) -c scanner.c && \
-	$(CC) $(CFLAGS) -c main.c    && \
-	$(CC) $(CFLAGS) -c repl.c    && \
-	$(CC) $(CFLAGS) -o ./../bin/escheme 			shared.o escheme.o scanner.o main.o -l gc && \
-	$(CC) $(CFLAGS) -o ./../bin/escheme-repl 	shared.o escheme.o scanner.o repl.o -l gc && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c shared.c  && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c escheme.c && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c scanner.c && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c main.c    && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c repl.c    && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) $(LIBRARIES) -o ./../bin/escheme			 shared.o escheme.o scanner.o main.o && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) $(LIBRARIES) -o ./../bin/escheme-repl shared.o escheme.o scanner.o repl.o && \
 	cd -
 
 clean:

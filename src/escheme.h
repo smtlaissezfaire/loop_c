@@ -3,6 +3,7 @@
 
 #include "shared.h"
 #include "scanner.h"
+#include "uthash.h"
 
 /* this is to compensate for issues with asprintf
 calling the generic malloc, not the malloc defined by the bohem GC
