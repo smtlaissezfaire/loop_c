@@ -74,7 +74,9 @@ void print(Object obj) {
 }
 
 static void allocate_globals() {
-  nil = cons(NULL, NULL);
+  nil          = cons(NULL, NULL);
+  booleanTrue  = makePrimitiveBoolean(true);
+  booleanFalse = makePrimitiveBoolean(false);
 }
 
 void ds_start() {

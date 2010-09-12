@@ -51,5 +51,7 @@ void set_source();
 
 /* globals */
 Object nil;
+Object booleanTrue;
+Object booleanFalse;
 
 #endif
