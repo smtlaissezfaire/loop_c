@@ -8,6 +8,7 @@ static Token *previousToken;
 static Token *getToken();
 static Token *putBackToken();
 static string source;
+static Object global_env = NULL;
 
 #include "types/primitives.c"
 #include "types/int.c"
@@ -83,6 +84,14 @@ static void allocate_globals() {
   nil          = cons(NULL, NULL);
   booleanTrue  = makePrimitiveBoolean(true);
   booleanFalse = makePrimitiveBoolean(false);
+
+  makePrimitiveProc("quote",  &primitive_quote);
+  makePrimitiveProc("car",    &primitive_car);
+  makePrimitiveProc("cdr",    &primitive_cdr);
+  makePrimitiveProc("cons",   &primitive_cons);
+  makePrimitiveProc("lambda", &primitive_lambda);
+  makePrimitiveProc("equal?", &primitive_equal_p);
+
 }
 
 void ds_start() {

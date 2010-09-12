@@ -28,9 +28,25 @@ static Object primitive_lambda(Object args) {
   return makeProc(formal_args, body);
 }
 
-static Object primtive_equal_p(Object args) {
+static Object primitive_equal_p(Object args) {
   Object o1 = eval(car(args));
   Object o2 = eval(car(cdr(args)));
 
   return isEqual(o1, o2);
+}
+
+static string printPrimitiveProc() {
+  return "#<primitive-proc>";
+}
+
+static Object makePrimitiveProc(string fun_name, Object (*fun)(Object)) {
+  Object obj = malloc(sizeof(sObject));
+
+  obj->type  = PROC;
+  obj->print = &printPrimitiveProc;
+  obj->eval  = fun;
+
+  HASH_ADD_KEYPTR(hh, global_env, fun_name, strlen(fun_name), obj);
+
+  return obj;
 }

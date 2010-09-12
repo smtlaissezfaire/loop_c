@@ -91,9 +91,10 @@ static string printList(Object self) {
 static Object evalList(Object self) {
   Object head = car(self);
   Object tail = cdr(self);
+  string fun_name;
   Object fun;
   Object args;
-  string fun_name;
+  Object fun_object = NULL;
 
   if (head->type == LIST) {
     fun = eval(head);
@@ -101,26 +102,16 @@ static Object evalList(Object self) {
     return apply(fun, args);
   } else {
     fun_name = head->value.stringValue;
+    HASH_FIND_STR(global_env, fun_name, fun_object);
 
-    if (strcmp(fun_name, "quote") == 0) {
-      return primitive_quote(tail);
-    } else if (strcmp(fun_name, "car") == 0) {
-      return primitive_car(tail);
-    } else if (strcmp(fun_name, "cdr") == 0) {
-      return primitive_cdr(tail);
-    } else if (strcmp(fun_name, "cons") == 0) {
-      return primitive_cons(tail);
-    } else if (strcmp(fun_name, "lambda") == 0) {
-      return primitive_lambda(tail);
-    } else if (strcmp(fun_name, "equal?") == 0) {
-      return primtive_equal_p(tail);
+    if (fun_object) {
+      return fun_object->eval(tail);
     } else {
       /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
       printf("UNKNOWN FUNCTION: %s", fun_name);
       exit(2);
     }
   }
-
 
   return self;
 }
