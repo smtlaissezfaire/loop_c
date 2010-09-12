@@ -103,26 +103,17 @@ static Object evalList(Object self) {
     fun_name = head->value.stringValue;
 
     if (strcmp(fun_name, "quote") == 0) {
-      return car(tail);
+      return primitive_quote(tail);
     } else if (strcmp(fun_name, "car") == 0) {
-      Object fun_and_args = car(tail);
-      Object result = fun_and_args->eval(fun_and_args);
-      return car(result);
+      return primitive_car(tail);
     } else if (strcmp(fun_name, "cdr") == 0) {
-      Object fun_and_args = car(tail);
-      Object result = fun_and_args->eval(fun_and_args);
-      return cdr(result);
+      return primitive_cdr(tail);
     } else if (strcmp(fun_name, "cons") == 0) {
-      Object fun_and_args = car(tail);
-      Object result = fun_and_args->eval(fun_and_args);
-      Object second_arg_and_fun = car(cdr(tail));
-      return cons(result, second_arg_and_fun->eval(second_arg_and_fun));
+      return primitive_cons(tail);
     } else if (strcmp(fun_name, "lambda") == 0) {
-      Object formal_args = car(tail);
-      Object body        = car(cdr(tail));
-      return makeProc(formal_args, body);
+      return primitive_lambda(tail);
     } else if (strcmp(fun_name, "equal?") == 0) {
-      return isEqual(eval(car(tail)), eval(car(cdr(tail))));
+      return primtive_equal_p(tail);
     } else {
       /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
       printf("UNKNOWN FUNCTION: %s", fun_name);

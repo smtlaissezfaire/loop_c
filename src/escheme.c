@@ -16,6 +16,7 @@ static string source;
 #include "types/string.c"
 #include "types/symbol.c"
 #include "types/proc.c"
+#include "types/primitive_procs.c"
 #include "types/list.c"
 
 static Token *getToken() {
