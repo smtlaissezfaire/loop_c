@@ -31,7 +31,7 @@ static Object makeSymbol() {
     obj->print             = &printSymbol;
     obj->eval              = &evalPrimitive;
 
-    HASH_ADD_KEYPTR(hh, symbol_table, str, strlen(str), obj);
+    HASH_ADD_STRING(symbol_table, str, obj);
   }
 
   return obj;

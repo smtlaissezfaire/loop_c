@@ -46,7 +46,7 @@ static Object makePrimitiveProc(string fun_name, Object (*fun)(Object)) {
   obj->print = &printPrimitiveProc;
   obj->eval  = fun;
 
-  HASH_ADD_KEYPTR(hh, global_env, fun_name, strlen(fun_name), obj);
+  HASH_ADD_STRING(global_env, fun_name, obj);
 
   return obj;
 }

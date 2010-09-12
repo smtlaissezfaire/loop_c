@@ -5,6 +5,8 @@
 #include "scanner.h"
 #include "uthash.h"
 
+#define HASH_ADD_STRING(table, str, obj) HASH_ADD_KEYPTR(hh, (table), (str), strlen(str), (obj))
+
 /* this is to compensate for issues with asprintf
 calling the generic malloc, not the malloc defined by the bohem GC
 
