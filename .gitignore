@@ -10,3 +10,5 @@ spec/logs
 
 # OS X files
 .DS_Store
+
+.bundle
