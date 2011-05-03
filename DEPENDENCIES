@@ -1,2 +1,10 @@
 re2c          - http://sourceforge.net/projects/re2c/
 Hans Boehm GC - http://www.hpl.hp.com/personal/Hans_Boehm/gc/#where
+
+Notes:
+
+Boehm GC - OS X:
+
+Had build errors trying to install from source.  Macports has one:
+
+port install boehmgc @7.1
