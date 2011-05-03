@@ -22,7 +22,7 @@ clean:
 	rm -rf spec/logs
 
 spec: compile
-	spec spec/escheme_spec.rb
+	rspec spec/escheme_spec.rb
 
 test: spec
 
