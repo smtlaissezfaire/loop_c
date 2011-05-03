@@ -1,5 +1,18 @@
-didactic scheme
-
-My second crack at a C-based scheme interpreter, loosely based on the lisp interpreter found @ http://www.sonoma.edu/users/l/luvisi/sl3.c.
+This is a C-based scheme interpreter, loosely based on the lisp interpreter found @ http://www.sonoma.edu/users/l/luvisi/sl3.c.
 
 It's mainly a way for me to learn both scheme, C, and interpreters / compilers.
+
+Eventually, I'd like to turn it into:
+
+λoop (loop) = The Lambda OOP Language
+
+Loop (also written λoop) is a made up of:
+
+1. A Scheme/Lisp like syntax with all the glory of a scheme like
+   philosophy - Keep it simple, but not stupid (advanced features
+   such as lambda, call/cc, macros).
+2. An OOP based framework where everything is an object.  It's prototype
+   based, a la self.
+3. An evented IO base, similar to node.js, so that scaling currently can be
+   done easily.
+
