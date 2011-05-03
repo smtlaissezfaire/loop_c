@@ -8,3 +8,10 @@ Boehm GC - OS X:
 Had build errors trying to install from source.  Macports has one:
 
 port install boehmgc @7.1
+
+After doing so, I added:
+
+export C_INCLUDE_PATH="/opt/local/include"
+export LIBRARY_PATH="/opt/local/lib"
+
+to my ~/.bash_profile and all was compiling correctly
