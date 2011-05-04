@@ -185,6 +185,13 @@ describe "escheme" do
       it "should be able to pass a value + return it" do
         run("((lambda (x) x) 20)").should == "20"
       end
+
+      it "should evaluate its arguments" do
+        pending do
+          run("(((lambda (x) x)
+                (lambda () 10)))").should == "10"
+        end
+      end
     end
 
     describe "equality with equal?" do
