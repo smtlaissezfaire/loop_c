@@ -183,9 +183,7 @@ describe "escheme" do
       end
 
       it "should be able to pass a value + return it" do
-        pending do
-          run("((lambda (x) x) 20)").should == "20"
-        end
+        run("((lambda (x) x) 20)").should == "20"
       end
     end
 

@@ -8,7 +8,7 @@ static Token *previousToken;
 static Token *getToken();
 static Token *putBackToken();
 static string source;
-static Object global_env = NULL;
+static Object global_env;
 
 #include "types/primitives.c"
 #include "types/int.c"
@@ -19,6 +19,8 @@ static Object global_env = NULL;
 #include "types/proc.c"
 #include "types/primitive_procs.c"
 #include "types/list.c"
+#include "types/hash.c"
+#include "types/environment.c"
 
 static Token *getToken() {
   if (currentToken == NULL) {
@@ -63,12 +65,13 @@ Object read() {
   return makeInt();
 }
 
-Object eval(Object obj) {
-  return obj->eval(obj);
+Object eval(Object obj, Object env) {
+  // should env = global env if env = NULL
+  return obj->eval(obj, env);
 }
 
-Object apply(Object fun) {
-  return fun->eval(fun);
+Object apply(Object fun, Object args) {
+  return applyProc(fun, args);
 }
 
 void print(Object obj) {
@@ -82,6 +85,7 @@ Object isEqual(Object o1, Object o2) {
 
 static void allocate_globals() {
   nil          = cons(NULL, NULL);
+  global_env   = NULL;
   booleanTrue  = makePrimitiveBoolean(true);
   booleanFalse = makePrimitiveBoolean(false);
 
@@ -91,7 +95,6 @@ static void allocate_globals() {
   makePrimitiveProc("cons",   &primitive_cons);
   makePrimitiveProc("lambda", &primitive_lambda);
   makePrimitiveProc("equal?", &primitive_equal_p);
-
 }
 
 void ds_start() {

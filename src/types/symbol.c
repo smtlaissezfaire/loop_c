@@ -3,6 +3,12 @@
 
 static Object symbol_table = NULL;
 
+static Object getEnvironmentValue(Object self, Object key);
+
+static Object evalSymbol(Object self, Object env) {
+  return getEnvironmentValue(env, self);
+}
+
 static string printSymbol(Object self) {
   size_t result;
   string str = calloc(MAX_SPRINTF_LENGTH, sizeof(string));
@@ -29,7 +35,7 @@ static Object makeSymbol() {
     obj->type              = SYMBOL;
     obj->value.stringValue = str;
     obj->print             = &printSymbol;
-    obj->eval              = &evalPrimitive;
+    obj->eval              = &evalSymbol;
 
     HASH_ADD_STRING(symbol_table, str, obj);
   }

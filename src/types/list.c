@@ -1,7 +1,7 @@
 #ifndef LIST_C
 #define LIST_C
 
-static Object evalList(Object);
+static Object evalList(Object, Object);
 static string printList(Object);
 
 static Object car(Object list) {
@@ -88,7 +88,7 @@ static string printList(Object self) {
   return str;
 }
 
-static Object evalList(Object self) {
+static Object evalList(Object self, Object env) {
   Object head = car(self);
   Object tail = cdr(self);
   string fun_name;
@@ -105,7 +105,7 @@ static Object evalList(Object self) {
     HASH_FIND_STR(global_env, fun_name, fun_object);
 
     if (fun_object) {
-      return fun_object->eval(tail);
+      return fun_object->eval(tail, env);
     } else {
       /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
       printf("UNKNOWN FUNCTION: %s", fun_name);

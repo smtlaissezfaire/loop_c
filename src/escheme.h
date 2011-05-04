@@ -5,7 +5,7 @@
 #include "scanner.h"
 #include "uthash.h"
 
-#define HASH_ADD_STRING(table, str, obj) HASH_ADD_KEYPTR(hh, (table), (str), strlen(str), (obj))
+#define HASH_ADD_STRING(table, str, obj) HASH_ADD_KEYPTR(hh, (table), (str), strlen((str)), (obj))
 
 /* this is to compensate for issues with asprintf
 calling the generic malloc, not the malloc defined by the bohem GC
@@ -20,7 +20,8 @@ enum types {
   SYMBOL,
   BOOLEAN,
   LIST,
-  PROC
+  PROC,
+  HASH
 };
 
 typedef union {
@@ -32,6 +33,7 @@ typedef union {
 
 struct sObject {
   UT_hash_handle hh;
+  struct sObject *hashTable;
 
   enum types type;
   oValue value;
@@ -40,7 +42,8 @@ struct sObject {
   struct sObject *formal_args;
   struct sObject *body;
           string (*print)(struct sObject *);
-  struct sObject *(*eval)(struct sObject *);
+  struct sObject *(*eval)(struct sObject *, struct sObject *);
+  struct sObject *env;
 };
 
 typedef struct sObject sObject;
@@ -53,6 +56,7 @@ Object apply();
 Object isEqual();
 void ds_start();
 void set_source();
+Object bind(Object self, Object keys, Object values);
 
 /* globals */
 Object nil;
