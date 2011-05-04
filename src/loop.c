@@ -1,7 +1,7 @@
 #ifndef ESCHEME_C
 #define ESCHEME_C
 
-#include "escheme.h"
+#include "loop.h"
 
 static Token *currentToken;
 static Token *previousToken;

@@ -7,12 +7,12 @@ compile: generate_tokenizer
 	mkdir -p bin && \
 	cd src && \
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c shared.c  && \
-	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c escheme.c && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c loop.c && \
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c scanner.c && \
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c main.c    && \
 	$(CC) $(CFLAGS) $(INCLUDE_PATHS) -c repl.c    && \
-	$(CC) $(CFLAGS) $(INCLUDE_PATHS) $(LIBRARIES) -o ./../bin/escheme			 shared.o escheme.o scanner.o main.o && \
-	$(CC) $(CFLAGS) $(INCLUDE_PATHS) $(LIBRARIES) -o ./../bin/escheme-repl shared.o escheme.o scanner.o repl.o && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) $(LIBRARIES) -o ./../bin/loop	    shared.o loop.o scanner.o main.o && \
+	$(CC) $(CFLAGS) $(INCLUDE_PATHS) $(LIBRARIES) -o ./../bin/loop-repl shared.o loop.o scanner.o repl.o && \
 	cd -
 
 clean:
@@ -22,12 +22,12 @@ clean:
 	rm -rf spec/logs
 
 spec: compile
-	rspec spec/escheme_spec.rb
+	rspec spec/loop_spec.rb
 
 test: spec
 
 spec_valgrind: compile
-	VALGRIND=true spec spec/escheme_spec.rb
+	VALGRIND=true spec spec/loop_spec.rb
 
 generate_tokenizer:
 	cd src && \

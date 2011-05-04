@@ -1,7 +1,7 @@
 #ifndef MAIN_C
 #define MAIN_C
 
-#include "escheme.h"
+#include "loop.h"
 
 int main(int argc, char **argv) {
   ds_start();

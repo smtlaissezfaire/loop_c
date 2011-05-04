@@ -1,12 +1,12 @@
 #ifndef REPL_C
 #define REPL_C
 
-#include "escheme.h"
+#include "loop.h"
 
 #define REPL_STRING_LENGTH 1000
 
 void repl_intro() {
-  puts("welcome to the escheme repl!");
+  puts("welcome to the loop repl!");
   puts("use .quit to exit");
 }
 

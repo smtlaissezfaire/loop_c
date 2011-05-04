@@ -1,19 +1,19 @@
 require "spec_helper"
 
-describe "escheme" do
+describe "loop" do
   def run(cmd)
     cmd = cmd.dup.gsub('"', '\"')
 
     if ENV['VALGRIND'] == "true"
       FileUtils.mkdir_p "spec/logs"
-      out = `valgrind --suppressions=./boehm-gc.suppressions --log-file=spec/logs/valgrind.log bin/escheme -e "#{cmd}"`
+      out = `valgrind --suppressions=./boehm-gc.suppressions --log-file=spec/logs/valgrind.log bin/loop -e "#{cmd}"`
 
       log = File.read("spec/logs/valgrind.log")
       log.should =~ /ERROR SUMMARY: 0/
       log.should =~ /definitely lost: 0 bytes in 0 blocks/
       out
     else
-      `bin/escheme -e "#{cmd}"`
+      `bin/loop -e "#{cmd}"`
     end
   end
 
