@@ -1,5 +1,5 @@
 CC            = gcc
-CFLAGS        = -W -Wall -g -c99 -pedantic
+CFLAGS        = -W -Wall -g -std=c99 -pedantic
 INCLUDE_PATHS = -I vendor/uthash-1.9.1/src
 LIBRARIES     = -l gc
 
