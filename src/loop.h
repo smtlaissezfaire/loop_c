@@ -57,6 +57,8 @@ Object isEqual();
 void ds_start();
 void set_source();
 Object bind(Object self, Object keys, Object values);
+Token *getToken();
+Token *putBackToken();
 
 /* globals */
 Object nil;

@@ -5,8 +5,6 @@
 
 static Token *currentToken;
 static Token *previousToken;
-static Token *getToken();
-static Token *putBackToken();
 static string source;
 static Object global_env;
 
@@ -22,7 +20,7 @@ static Object global_env;
 #include "types/hash.c"
 #include "types/environment.c"
 
-static Token *getToken() {
+Token *getToken() {
   if (currentToken == NULL) {
     currentToken = scan(source);
     previousToken = NULL;
@@ -34,7 +32,7 @@ static Token *getToken() {
   return currentToken;
 }
 
-static Token *putBackToken() {
+Token *putBackToken() {
   currentToken = previousToken;
   return currentToken;
 }

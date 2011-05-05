@@ -8,7 +8,19 @@ int main(int argc, char **argv) {
 
   if (argc >= 2) {
     set_source(argv[2]);
-    print(eval(read()));
+
+    do {
+      print(eval(read()));
+
+      Token *nextToken = getToken();
+      putBackToken();
+
+      if (nextToken == NULL) {
+        break;
+      } else {
+        puts("");
+      }
+    } while (1);
   }
 
   return 0;

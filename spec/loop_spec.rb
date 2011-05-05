@@ -63,14 +63,12 @@ describe "loop" do
     end
   end
 
-  # describe "multiple objects" do
-  #   it "should print two on two lines" do |variable|
-  #     pending do
-  #       run("1 2").should == "1\n2"
-  #     end
-  #   end
-  # end
-  #
+  describe "multiple objects" do
+    it "should print two on two lines" do |variable|
+      run("1 2").should == "1\n2"
+    end
+  end
+
   describe "lists" do
     describe "list function" do
       # it "should make a nil list" do
