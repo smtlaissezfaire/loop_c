@@ -187,7 +187,7 @@ describe "loop" do
       end
 
       it "should evaluate its arguments" do
-        pending do
+        pending "fix this tokenization error" do
           run("(((lambda (x) x)
                 (lambda () 10)))").should == "10"
         end
