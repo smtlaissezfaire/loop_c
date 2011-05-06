@@ -1,7 +1,7 @@
 #ifndef LIST_C
 #define LIST_C
 
-static Object evalList(Object, Object);
+static Object evList(Object, Object);
 static string printList(Object);
 
 static Object car(Object list) {
@@ -31,7 +31,7 @@ static Object cons(Object head, Object tail) {
   obj->tail = tail;
 
   obj->type  = LIST;
-  obj->eval  = &evalList;
+  obj->eval  = &evList;
   obj->print = &printList;
 
   return obj;
@@ -88,7 +88,7 @@ static string printList(Object self) {
   return str;
 }
 
-static Object evalList(Object self, Object env) {
+static Object evList(Object self, Object env) {
   Object fun = eval(car(self), env);
   Object args = cdr(self);
 
