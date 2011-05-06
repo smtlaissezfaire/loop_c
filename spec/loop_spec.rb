@@ -112,7 +112,7 @@ describe "loop" do
           run_with_printing("(quote ((foo bar) (((()))) bar))").should == "((foo bar) (((()))) bar)"
         end
 
-        # it "should throw an exception if more than one elment is given to the quote" do
+        # it "should throw an exception if more than one element is given to the quote" do
         #   run_with_printing("(quote foo bar)")
         # end
       end
