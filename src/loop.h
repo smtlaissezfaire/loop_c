@@ -50,7 +50,7 @@ typedef struct sObject sObject;
 typedef sObject*       Object;
 
 Object read();
-Object eval();
+Object eval(Object obj, Object env);
 void print();
 Object apply();
 Object isEqual();
@@ -59,10 +59,18 @@ void set_source();
 Object bind(Object self, Object keys, Object values);
 Token *getToken();
 Token *putBackToken();
+Object getEnvironmentValue(Object self, Object key);
+Object getEnvironmentValues(Object self, Object keys);
+Object setEnvironmentValue(Object self, Object key, Object value);
+Object HashGet(Object self, Object key);
+Object HashSet(Object self, Object key, Object value);
+
 
 /* globals */
 Object nil;
 Object booleanTrue;
 Object booleanFalse;
+Object global_env;
+Object symbol_table;
 
 #endif

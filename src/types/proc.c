@@ -1,10 +1,16 @@
 #ifndef PROC_C
 #define PROC_C
 
-static Object applyProc(Object self, Object values) {
+static Object applyProc(Object self, Object argValues) {
   Object body = self->body;
 
-  return eval(body, bind(self->env, self->formal_args, values));
+  if (body == nil) { // primitive proc
+    // this should be apply, structed under the primitive proc type, right?
+    return self->eval(argValues, global_env); // should this be the global env?
+  } else {
+    // this should be the body of self->apply
+    return eval(body, bind(self->env, self->formal_args, argValues));
+  }
 }
 
 static string printProc() {

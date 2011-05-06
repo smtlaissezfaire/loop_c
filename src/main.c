@@ -9,18 +9,16 @@ int main(int argc, char **argv) {
   if (argc >= 2) {
     set_source(argv[2]);
 
-    do {
-      print(eval(read()));
+    while (true) {
+      eval(read(), global_env);
 
       Token *nextToken = getToken();
       putBackToken();
 
       if (nextToken == NULL) {
         break;
-      } else {
-        puts("");
       }
-    } while (1);
+    }
   }
 
   return 0;

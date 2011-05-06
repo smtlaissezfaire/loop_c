@@ -16,16 +16,20 @@ static string printString(Object self) {
   return str;
 }
 
-static Object makeString() {
-  Token *token = getToken();
-  Object obj   = malloc(sizeof(sObject));
+static Object makeStringFromCString(string str) {
+  Object obj = malloc(sizeof(sObject));
 
   obj->type              = STRING;
-  obj->value.stringValue = token->str;
+  obj->value.stringValue = str;
   obj->print             = &printString;
   obj->eval              = &evalPrimitive;
 
   return obj;
+}
+
+static Object makeString() {
+  Token *token = getToken();
+  return makeStringFromCString(token->str);
 }
 
 #endif

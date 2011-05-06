@@ -29,7 +29,7 @@ int main() {
       break;
     }
 
-    print(eval(read()));
+    print(eval(read(), global_env));
     puts("");
 
     repl_prompt();

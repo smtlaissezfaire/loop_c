@@ -89,31 +89,10 @@ static string printList(Object self) {
 }
 
 static Object evalList(Object self, Object env) {
-  Object head = car(self);
-  Object tail = cdr(self);
-  string fun_name;
-  Object fun;
-  Object args;
-  Object fun_object = NULL;
+  Object fun = eval(car(self), env);
+  Object args = cdr(self);
 
-  if (head->type == LIST) {
-    fun = eval(head);
-    args = tail;
-    return apply(fun, args);
-  } else {
-    fun_name = head->value.stringValue;
-    HASH_FIND_STR(global_env, fun_name, fun_object);
-
-    if (fun_object) {
-      return fun_object->eval(tail, env);
-    } else {
-      /* convert exitWithMessage to a macro / multiarg fun that accept %s and other printf formats */
-      printf("UNKNOWN FUNCTION: %s", fun_name);
-      exit(2);
-    }
-  }
-
-  return self;
+  return apply(fun, args);
 }
 
 static Object makeList() {

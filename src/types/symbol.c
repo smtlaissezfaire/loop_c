@@ -1,10 +1,6 @@
 #ifndef SYMBOL_C
 #define SYMBOL_C
 
-static Object symbol_table = NULL;
-
-static Object getEnvironmentValue(Object self, Object key);
-
 static Object evalSymbol(Object self, Object env) {
   return getEnvironmentValue(env, self);
 }
@@ -24,11 +20,9 @@ static string printSymbol(Object self) {
   return str;
 }
 
-static Object makeSymbol() {
-  Object obj = NULL;
-  string str = getToken()->str;
-
-  HASH_FIND_STR(symbol_table, str, obj);
+static Object symbolFromCString(string str) {
+  Object oString = makeStringFromCString(str);
+  Object obj = HashGet(symbol_table, oString);
 
   if (!obj) {
     obj = malloc(sizeof(sObject));
@@ -37,10 +31,14 @@ static Object makeSymbol() {
     obj->print             = &printSymbol;
     obj->eval              = &evalSymbol;
 
-    HASH_ADD_STRING(symbol_table, str, obj);
+    HashSet(symbol_table, oString, obj);
   }
 
   return obj;
+}
+
+static Object makeSymbol() {
+  return symbolFromCString(getToken()->str);
 }
 
 #endif

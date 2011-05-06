@@ -1,14 +1,14 @@
 #ifndef HASH_C
 #define HASH_C
 
-static Object HashGet(Object self, Object key) {
+Object HashGet(Object self, Object key) {
   string str = key->print(key);
   Object obj = NULL;
   HASH_FIND_STR(self->hashTable, str, obj);
   return obj;
 }
 
-static Object HashSet(Object self, Object key, Object value) {
+Object HashSet(Object self, Object key, Object value) {
   string str = key->print(key);
   HASH_ADD_STRING(self->hashTable, str, value);
   return self;

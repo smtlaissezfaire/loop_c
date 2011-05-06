@@ -35,6 +35,13 @@ static Object primitive_equal_p(Object args, Object env) {
   return isEqual(o1, o2);
 }
 
+static Object primitive_print(Object args, Object env) {
+  Object obj = eval(car(args), env);
+
+  print(obj);
+  return obj;
+}
+
 static string printPrimitiveProc() {
   return "#<primitive-proc>";
 }
@@ -45,8 +52,9 @@ static Object makePrimitiveProc(string fun_name, Object (*fun)(Object, Object)) 
   obj->type  = PROC;
   obj->print = &printPrimitiveProc;
   obj->eval  = fun;
+  obj->body  = nil;
 
-  HASH_ADD_STRING(global_env, fun_name, obj);
+  setEnvironmentValue(global_env, symbolFromCString(fun_name), obj);
 
   return obj;
 }

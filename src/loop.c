@@ -6,7 +6,6 @@
 static Token *currentToken;
 static Token *previousToken;
 static string source;
-static Object global_env;
 
 #include "types/primitives.c"
 #include "types/int.c"
@@ -83,9 +82,10 @@ Object isEqual(Object o1, Object o2) {
 
 static void allocate_globals() {
   nil          = cons(NULL, NULL);
-  global_env   = NULL;
   booleanTrue  = makePrimitiveBoolean(true);
   booleanFalse = makePrimitiveBoolean(false);
+  global_env   = makeEnvironment();
+  symbol_table = makeHash();
 
   makePrimitiveProc("quote",  &primitive_quote);
   makePrimitiveProc("car",    &primitive_car);
@@ -93,6 +93,7 @@ static void allocate_globals() {
   makePrimitiveProc("cons",   &primitive_cons);
   makePrimitiveProc("lambda", &primitive_lambda);
   makePrimitiveProc("equal?", &primitive_equal_p);
+  makePrimitiveProc("print",  &primitive_print);
 }
 
 void ds_start() {

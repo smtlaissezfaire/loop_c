@@ -7,7 +7,7 @@ Object bind(Object self, Object keys, Object values) {
   Object keysList = keys;
   Object valuesList = values;
 
-  do {
+  while (true) {
     if (keysList == nil || valuesList == nil) {
       break;
     } else {
@@ -19,28 +19,46 @@ Object bind(Object self, Object keys, Object values) {
       keysList = cdr(keysList);
       valuesList = cdr(valuesList);
     }
-  } while(1);
+  }
 
   return cons(hash, self);
 }
 
-static Object getEnvironmentValue(Object self, Object key) {
+Object getEnvironmentValue(Object self, Object key) {
   Object value;
   Object list = self;
 
-  do {
+  while (true) {
     if (list == nil) {
       return nil;
     }
 
-    value = HashGet(car(self), key);
+    value = HashGet(car(list), key);
 
     if (value) {
       return value;
     }
 
     list = cdr(list);
-  } while (1);
+  }
+}
+
+Object getEnvironmentValues(Object self, Object keys) {
+  if (empty_p(keys)) {
+    return nil;
+  } else {
+    return cons(getEnvironmentValue(self, car(keys)),
+                getEnvironmentValues(self, cdr(keys)));
+  }
+}
+
+Object setEnvironmentValue(Object self, Object key, Object value) {
+  HashSet(car(self), key, value);
+  return self;
+}
+
+static Object makeEnvironment() {
+  return cons(makeHash(), nil);
 }
 
 #endif
