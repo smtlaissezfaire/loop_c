@@ -221,5 +221,70 @@ describe "loop" do
         run_with_printing("(equal? (quote foo) (quote bar))").should == "#f"
       end
     end
+
+    describe "define" do
+      it "should set a value in the environment" do
+        run("(define x 10)
+             (print x)").should == "10"
+      end
+
+      it "should return the value set in the environment" do
+        run_with_printing("(define x 10)").should == "10"
+      end
+
+      it "should evaluate its argument (it should be able to chain defines)" do
+        run("(define x 10)
+             (define y x)
+             (print y)").should == "10"
+      end
+
+      it "should store copies as copies, not as references" do
+        code = <<-CODE
+          (define x 10)
+          (define y x)
+
+          (define x 20)
+          (print y)
+        CODE
+
+        run(code).should == "10"
+      end
+
+      it "should be able to define and run a function" do
+        code = <<-CODE
+          (define foo
+            (lambda ()
+              (quote ())))
+
+          (print (foo))
+        CODE
+
+        run(code).should == "()"
+      end
+
+      it "should be able to define and run a function with one argument" do
+        code = <<-CODE
+          (define foo
+            (lambda (x)
+              x))
+
+          (print (foo 10))
+        CODE
+
+        run(code).should == "10"
+      end
+
+      it "should be able to define and run a function with two arguments" do
+        code = <<-CODE
+          (define foo
+            (lambda (x y)
+              y))
+
+          (print (foo 10 20))
+        CODE
+
+        run(code).should == "20"
+      end
+    end
   end
 end

@@ -42,6 +42,14 @@ static Object primitive_print(Object args, Object env) {
   return obj;
 }
 
+static Object primitive_define(Object args, Object env) {
+  Object variable = car(args);
+  Object value    = eval(car(cdr(args)), env);
+
+  setEnvironmentValue(env, variable, value);
+  return value;
+}
+
 static string printPrimitiveProc() {
   return "#<primitive-proc>";
 }
