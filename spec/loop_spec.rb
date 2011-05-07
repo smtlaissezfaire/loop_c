@@ -286,5 +286,61 @@ describe "loop" do
         run(code).should == "20"
       end
     end
+
+    describe "scoping variables" do
+      it "should keep scope local" do
+        code = <<-CODE
+          (define x 10)
+
+          ((lambda (x) x) 20)
+
+          (print x)
+        CODE
+
+        run(code).should == "10"
+      end
+
+      it "should have local scope inside a lambda" do
+        pending do
+          code = <<-CODE
+            (define x 10)
+
+            (define print-x
+              (lambda (x)
+                (print x)))
+
+            (print-x 20)
+          CODE
+
+          run(code).should == "20"
+        end
+      end
+    end
+
+    describe "cond" do
+      it "should evaluate to the first true branch" do
+        code = <<-CODE
+          (cond (#t #t) (#f #f))
+        CODE
+
+        run_with_printing(code).should == "#t"
+      end
+
+      it "should return the first value in the true branch" do
+        run_with_printing("(cond (#t 10) (#f #f))").should == "10"
+      end
+
+      it "should return the value in the first true branch (when the first true one is the second one)" do
+        run_with_printing("(cond (#f 10) (#t 20))").should == "20"
+      end
+
+      it "should return false if given no arguments" do
+        run_with_printing("(cond)").should == "#f"
+      end
+
+      it "should run the last clause if the last clause is an else" do
+        run_with_printing("(cond (#f 1) (else 2))").should == "2"
+      end
+    end
   end
 end

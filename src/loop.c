@@ -95,6 +95,7 @@ static void allocate_globals() {
   makePrimitiveProc("equal?", &primitive_equal_p);
   makePrimitiveProc("print",  &primitive_print);
   makePrimitiveProc("define", &primitive_define);
+  makePrimitiveProc("cond",   &primitive_cond);
 }
 
 void ds_start() {

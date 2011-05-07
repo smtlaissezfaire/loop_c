@@ -37,7 +37,7 @@ static Object cons(Object head, Object tail) {
   return obj;
 }
 
-static int empty_p(Object self) {
+int empty_p(Object self) {
   return self == nil;
 }
 

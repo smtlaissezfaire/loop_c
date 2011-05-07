@@ -50,6 +50,25 @@ static Object primitive_define(Object args, Object env) {
   return value;
 }
 
+static Object primitive_cond(Object args, Object env) {
+  if (empty_p(args)) {
+    return booleanFalse;
+  }
+
+  Object pair = car(args);
+
+  // fixme: else is working because identifiers
+  // that aren't defined are evaluating to nil,
+  // i.e. ().
+  if (eval(car(pair), env) == booleanFalse) {
+    return primitive_cond(cdr(args), env);
+  } else {
+    return eval(car(cdr(pair)), env);
+  }
+
+  return booleanTrue;
+}
+
 static string printPrimitiveProc() {
   return "#<primitive-proc>";
 }

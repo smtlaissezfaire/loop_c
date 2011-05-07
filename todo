@@ -1,6 +1,5 @@
 high priority:
-- lambda
-- function calling
+- write a simple testing framework in loop itself
 
 low priority:
 - big numbers (how do other implementations do this)?

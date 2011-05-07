@@ -64,7 +64,7 @@ Object getEnvironmentValues(Object self, Object keys);
 Object setEnvironmentValue(Object self, Object key, Object value);
 Object HashGet(Object self, Object key);
 Object HashSet(Object self, Object key, Object value);
-
+int empty_p(Object self);
 
 /* globals */
 Object nil;
