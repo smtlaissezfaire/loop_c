@@ -55,6 +55,10 @@ describe "loop" do
     it "should allow for an empty string" do
       run_with_printing('""').should == '""'
     end
+
+    it "should allow periods in strings" do
+      run_with_printing('"."').should == '"."'
+    end
   end
 
   describe "booleans - #t and #f" do
