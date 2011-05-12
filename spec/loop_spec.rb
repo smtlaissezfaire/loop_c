@@ -59,6 +59,16 @@ describe "loop" do
     it "should allow periods in strings" do
       run_with_printing('"."').should == '"."'
     end
+
+    it "should allow a capital letter in a string" do
+      run_with_printing('"A"').should == '"A"'
+    end
+
+    it "should allow caps in strings" do
+      pending do
+        run_with_printing('"ABCDEFGHIJKLMNOPQRSTUVWXYZ"').should == '"ABCDEFGHIJKLMNOPQRSTUVWXYZ"'
+      end
+    end
   end
 
   describe "booleans - #t and #f" do

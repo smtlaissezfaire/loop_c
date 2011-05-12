@@ -63,7 +63,7 @@ Token *scan(string str) {
       int            = [0-9]+;
       period         = ".";
       float          = [0-9]* period [0-9]+;
-      string         = "\"" [a-z\.]* "\"";
+      string         = "\"" ([^"])* "\"";
       symbol         = [a-z?]+;
       boolean_true   = "#t";
       boolean_false  = "#f";
