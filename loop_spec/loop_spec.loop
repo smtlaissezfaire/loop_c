@@ -1,0 +1,39 @@
+(define equal
+  (lambda (one two)
+    (cond
+     ((eq? one two)
+      (print "."))
+     (else
+      (print "F")))))
+
+(define describe
+  (lambda (str fun)
+    (fun)))
+
+(define it
+  (lambda (str fun)
+    (fun)))
+
+(describe "cond"
+  (lambda ()
+    (it "should evaluate to the first true branch"
+      (lambda ()
+        (equal (cond (#t #t) (#f #f))
+               #t)))
+
+    (it "should return the first value in the true branch"
+      (lambda ()
+        (equal (cond (#t 10) (#f #f))
+               10)))
+
+    (it "should return the value in the first true branch (when the first true one is the second one)"
+      (lambda ()
+        (equal (cond (#f 10) (#t 20)) 20)))
+
+    (it "should return false if given no arguments"
+      (lambda ()
+        (equal (cond) #f)))
+
+    (it "should run the last clause if the last clause is an else"
+      (lambda ()
+        (equal (cond (#f 1) (else 2)) 2)))))
