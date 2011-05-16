@@ -203,10 +203,13 @@ describe "loop" do
       end
 
       it "should evaluate its arguments" do
-        pending "fix this tokenization error" do
-          run_with_printing("(((lambda (x) x)
-                              (lambda () 10)))").should == "10"
-        end
+        run_with_printing("((lambda (x) x)
+                            (cons 1 2))").should == '(1 . 2)'
+      end
+
+      it "should evaluate lambda arguments" do
+        run_with_printing("(((lambda (x) x)
+                            (lambda () 10)))").should == "10"
       end
     end
 
@@ -298,6 +301,19 @@ describe "loop" do
         CODE
 
         run(code).should == "20"
+      end
+
+      it "should be able to pass a function to a function, and the function passed should be callable" do
+        code = <<-CODE
+          (define describe
+            (lambda (fun)
+              (fun)))
+
+          (describe
+            (lambda () (print 10)))
+        CODE
+
+        run(code).should == "10"
       end
     end
 

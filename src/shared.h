@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
 
 /* this must come last, as we don't system libraries, etc, using this */
 #include <gc.h>

@@ -73,13 +73,18 @@ static string printPrimitiveProc() {
   return "#<primitive-proc>";
 }
 
+static Object applyPrimitiveProc(Object self, Object argValues) {
+  return self->eval(argValues, self->env); // should this be the global env?
+}
+
 static Object makePrimitiveProc(string fun_name, Object (*fun)(Object, Object)) {
   Object obj = malloc(sizeof(sObject));
 
-  obj->type  = PROC;
+  obj->type  = PRIM_PROC;
   obj->print = &printPrimitiveProc;
   obj->eval  = fun;
   obj->body  = nil;
+  obj->env   = global_env;
 
   setEnvironmentValue(global_env, symbolFromCString(fun_name), obj);
 

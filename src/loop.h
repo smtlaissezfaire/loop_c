@@ -21,6 +21,7 @@ enum types {
   BOOLEAN,
   LIST,
   PROC,
+  PRIM_PROC,
   HASH
 };
 

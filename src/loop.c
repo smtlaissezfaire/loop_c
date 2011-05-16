@@ -63,12 +63,23 @@ Object read() {
 }
 
 Object eval(Object obj, Object env) {
-  // should env = global env if env = NULL
+  // should env = global env if env = NULL?
   return obj->eval(obj, env);
 }
 
 Object apply(Object fun, Object args) {
-  return applyProc(fun, args);
+  Object obj;
+  assert(fun->type == PRIM_PROC || fun->type == PROC);
+
+  switch(fun->type) {
+    case PRIM_PROC:
+      return applyPrimitiveProc(fun, args);
+    case PROC:
+      return applyProc(fun, args);
+    default:
+      // should never reach here, as assertion should have already failed
+      return obj;
+  }
 }
 
 void print(Object obj) {
