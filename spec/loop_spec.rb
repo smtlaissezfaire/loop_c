@@ -315,6 +315,14 @@ describe "loop" do
 
         run(code).should == "10"
       end
+
+      it "should allow dashes in identifiers" do
+        run("(define foo-bar 10) (print foo-bar)").should == "10"
+      end
+
+      it "should allow underscores in identifiers" do
+        run("(define foo_bar 10) (print foo_bar)").should == "10"
+      end
     end
 
     describe "scoping variables" do
