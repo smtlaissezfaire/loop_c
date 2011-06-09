@@ -83,8 +83,6 @@ static Object makePrimitiveProc(string fun_name, Object (*fun)(Object, Object)) 
   obj->type  = PRIM_PROC;
   obj->print = &printPrimitiveProc;
   obj->eval  = fun;
-  obj->body  = nil;
-  obj->env   = global_env;
 
   setEnvironmentValue(global_env, symbolFromCString(fun_name), obj);
 
