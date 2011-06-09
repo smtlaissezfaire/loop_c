@@ -211,6 +211,20 @@ describe "loop" do
         run_with_printing("(((lambda (x) x)
                             (lambda () 10)))").should == "10"
       end
+
+      it "should have an implicit 'begin...end' (as per scheme) around lambdas - and run all lines" do
+        pending do
+          run(<<-CODE).should == "123"
+            (define print-many
+              (lambda ()
+                (print 1)
+                (print 2)
+                (print 3)))
+
+            (print-many)
+          CODE
+        end
+      end
     end
 
     describe "equality with equal?" do
