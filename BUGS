@@ -1,0 +1,3 @@
+- only one line of a lambda is running
+- user defined functions aren't using the environment they are defined in, they are using the global scope as their definition env
+- are environment variables replaced properly after redefinition?  uthash's docs say that a key has to be explicitly deleted before it can be "updated"
