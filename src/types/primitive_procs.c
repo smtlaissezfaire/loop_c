@@ -73,8 +73,8 @@ static string printPrimitiveProc() {
   return "#<primitive-proc>";
 }
 
-static Object applyPrimitiveProc(Object self, Object argValues) {
-  return self->eval(argValues, self->env); // should this be the global env?
+static Object applyPrimitiveProc(Object self, Object argValues, Object env) {
+  return self->eval(argValues, env); // should this be the global env?
 }
 
 static Object makePrimitiveProc(string fun_name, Object (*fun)(Object, Object)) {

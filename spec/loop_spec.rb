@@ -338,20 +338,18 @@ describe "loop" do
         run(code).should == "10"
       end
 
-      it "should have local scope inside a lambda" do
-        pending do
-          code = <<-CODE
-            (define x 10)
+      it "should prefer argument values to environment values inside a function" do
+        code = <<-CODE
+          (define x 10)
 
-            (define print-x
-              (lambda (x)
-                (print x)))
+          (define print-x
+            (lambda (x)
+              (print x)))
 
-            (print-x 20)
-          CODE
+          (print-x 20)
+        CODE
 
-          run(code).should == "20"
-        end
+        run(code).should == "20"
       end
     end
 

@@ -67,13 +67,13 @@ Object eval(Object obj, Object env) {
   return obj->eval(obj, env);
 }
 
-Object apply(Object fun, Object args) {
+Object apply(Object fun, Object args, Object env) {
   Object obj;
   assert(fun->type == PRIM_PROC || fun->type == PROC);
 
   switch(fun->type) {
     case PRIM_PROC:
-      return applyPrimitiveProc(fun, args);
+      return applyPrimitiveProc(fun, args, env);
     case PROC:
       return applyProc(fun, args);
     default:

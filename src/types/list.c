@@ -92,7 +92,7 @@ static Object evList(Object self, Object env) {
   Object fun = eval(car(self), env);
   Object args = cdr(self);
 
-  return apply(fun, args);
+  return apply(fun, args, env);
 }
 
 static Object makeList() {
