@@ -350,7 +350,7 @@ describe "loop" do
         run(code).should == "10"
       end
 
-      it "should prefer argument values to environment values inside a function" do
+      it "should prefer argument values to environment values inside a primitive function" do
         code = <<-CODE
           (define x 10)
 
@@ -362,6 +362,50 @@ describe "loop" do
         CODE
 
         run(code).should == "20"
+      end
+
+      it "should use variables of the environment it is defined in (for user defined functions)" do
+        code = <<-CODE
+          (define print-x
+            (lambda ()
+              (define x 20)
+              (print x)))
+
+          (print-x)
+        CODE
+
+        run(code).should == "20"
+      end
+
+      it "should use the correct variable in its environment" do
+        code = <<-CODE
+          (define x 10)
+
+          (define print-x
+            (lambda ()
+              (define x 20)
+              (print x)))
+
+          (print-x)
+        CODE
+
+        run(code).should == "20"
+      end
+
+      it "should use the value in the outer scope if one is not defined in the inner scope" do
+        code = <<-CODE
+          (define x 10)
+
+          (define print-x
+            (lambda ()
+              (print x)))
+          
+          (define x 40)
+
+          (print-x)
+        CODE
+
+        run(code).should == "40"
       end
     end
 
