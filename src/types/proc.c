@@ -11,10 +11,27 @@ static Object listOfValues(Object list, Object env) {
   }
 }
 
+static Object evalExpressions(Object expressions, Object environment) {
+  Object returnValue = nil;
+
+  Object nextExpression;
+  Object restOfExpressions = expressions;
+
+  do {
+    nextExpression    = car(restOfExpressions);
+    restOfExpressions = cdr(restOfExpressions);
+
+    returnValue = eval(nextExpression, environment);
+  } while (!empty_p(restOfExpressions));
+
+  return returnValue;
+}
+
 static Object applyProc(Object self, Object argsUnevaluated) {
   Object argValues = listOfValues(argsUnevaluated, self->env);
+  Object tmpEnv    = bind(self->env, self->formal_args, argValues);
 
-  return eval(self->body, bind(self->env, self->formal_args, argValues));
+  return evalExpressions(self->body, tmpEnv);
 }
 
 static string printProc() {

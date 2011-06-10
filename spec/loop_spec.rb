@@ -213,17 +213,15 @@ describe "loop" do
       end
 
       it "should have an implicit 'begin...end' (as per scheme) around lambdas - and run all lines" do
-        pending do
-          run(<<-CODE).should == "123"
-            (define print-many
-              (lambda ()
-                (print 1)
-                (print 2)
-                (print 3)))
+        run(<<-CODE).should == "123"
+          (define print-many
+            (lambda ()
+              (print 1)
+              (print 2)
+              (print 3)))
 
-            (print-many)
-          CODE
-        end
+          (print-many)
+        CODE
       end
     end
 

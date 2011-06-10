@@ -24,7 +24,8 @@ static Object primitive_cons(Object args, Object env) {
 
 static Object primitive_lambda(Object args, Object env) {
   Object formal_args = car(args);
-  Object body        = car(cdr(args));
+  Object body        = cdr(args);
+
   return makeProc(formal_args, body, env);
 }
 
