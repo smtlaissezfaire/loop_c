@@ -223,6 +223,30 @@ describe "loop" do
           (print-many)
         CODE
       end
+
+      it "should use variables in the scope the lambda was defined in" do
+        run(<<-CODE).should == "10"
+          (define my-fun
+            (lambda ()
+              (define x 10)
+              (lambda () x)))
+
+          (print ((my-fun)))
+        CODE
+      end
+
+      it "should use variables in an anonymous scope for built-in functions" do
+        run(<<-CODE).should == "10"
+          (define x 20)
+
+          (define my-fun
+            (lambda ()
+              (define x 10)
+              (print x)))
+
+          (my-fun)
+        CODE
+      end
     end
 
     describe "equality with equal?" do
@@ -399,7 +423,7 @@ describe "loop" do
           (define print-x
             (lambda ()
               (print x)))
-          
+
           (define x 40)
 
           (print-x)
