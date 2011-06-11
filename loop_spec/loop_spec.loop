@@ -1,7 +1,7 @@
 (define equal
   (lambda (one two)
     (cond
-     ((eq? one two)
+     ((equal? one two)
       (print "."))
      (else
       (print "F")))))
